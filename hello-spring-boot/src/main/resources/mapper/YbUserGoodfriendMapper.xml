@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funtl.hello.spring.boot.mapper.YbUserGoodfriendMapper">
+  <resultMap id="BaseResultMap" type="com.funtl.hello.spring.boot.entity.YbUserGoodfriend">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="updated" jdbcType="DATE" property="updated" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="friend_id" jdbcType="BIGINT" property="friendId" />
+    <result column="created" jdbcType="DATE" property="created" />
+  </resultMap>
+</mapper>

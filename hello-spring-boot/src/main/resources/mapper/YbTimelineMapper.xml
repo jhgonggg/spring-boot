@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funtl.hello.spring.boot.mapper.YbTimelineMapper">
+  <resultMap id="BaseResultMap" type="com.funtl.hello.spring.boot.entity.YbTimeline">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="fcmid" jdbcType="BIGINT" property="fcmid" />
+    <result column="is_own" jdbcType="BIT" property="isOwn" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+  </resultMap>
+</mapper>

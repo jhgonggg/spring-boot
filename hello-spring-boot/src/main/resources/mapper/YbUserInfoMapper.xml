@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funtl.hello.spring.boot.mapper.YbUserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.funtl.hello.spring.boot.entity.YbUserInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="profession" jdbcType="VARCHAR" property="profession" />
+    <result column="personal_signature" jdbcType="VARCHAR" property="personalSignature" />
+    <result column="hobby" jdbcType="VARCHAR" property="hobby" />
+    <result column="updated" jdbcType="DATE" property="updated" />
+    <result column="created" jdbcType="DATE" property="created" />
+  </resultMap>
+</mapper>

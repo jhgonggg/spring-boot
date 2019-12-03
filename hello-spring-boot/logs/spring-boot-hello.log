@@ -1,0 +1,343 @@
+2019-12-02 16:54:11.441  INFO 77716 --- [main] .f.h.s.b.HelloSpringBootApplicationTests : Starting HelloSpringBootApplicationTests on DDZA02434 with PID 77716 (started by apptest1 in E:\lean\springboot\hello-spring-boot)
+2019-12-02 16:54:11.452  INFO 77716 --- [main] .f.h.s.b.HelloSpringBootApplicationTests : No active profile set, falling back to default profiles: default
+2019-12-02 16:54:11.503 DEBUG 77716 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@cd1e646
+2019-12-02 16:54:12.123  WARN 77716 --- [main] t.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.funtl.hello.spring.boot]' package. Please check your configuration.
+2019-12-02 16:54:12.140  WARN 77716 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.funtl.hello.spring.boot]' package. Please check your configuration.
+2019-12-02 16:54:12.543  INFO 77716 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-12-02 16:54:13.119  INFO 77716 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-12-02 16:54:13.427  INFO 77716 --- [main] c.f.h.s.boot.quartz.QuartzJobManager     : init jobUtil
+2019-12-02 16:54:13.492  INFO 77716 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-12-02 16:54:13.506  INFO 77716 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-12-02 16:54:13.506  INFO 77716 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.1 created.
+2019-12-02 16:54:13.507  INFO 77716 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-12-02 16:54:13.508  INFO 77716 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.1) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-12-02 16:54:13.508  INFO 77716 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'DefaultQuartzScheduler' initialized from an externally provided properties instance.
+2019-12-02 16:54:13.508  INFO 77716 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.1
+2019-12-02 16:54:13.508  INFO 77716 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: com.funtl.hello.spring.boot.config.TaskJobFactory@6c3659be
+2019-12-02 16:54:13.534  WARN 77716 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'propertiesUtils' defined in file [E:\lean\springboot\hello-spring-boot\target\classes\com\funtl\hello\spring\boot\util\PropertiesUtils.class]: Instantiation of bean failed; nested exception is java.lang.ExceptionInInitializerError
+2019-12-02 16:54:13.534  INFO 77716 --- [main] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+2019-12-02 16:54:13.534  INFO 77716 --- [main] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+2019-12-02 16:54:13.534  INFO 77716 --- [main] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+2019-12-02 16:54:13.535  INFO 77716 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2019-12-02 16:54:13.537  INFO 77716 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-12-02 16:54:13.545  INFO 77716 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-12-02 16:54:13.549 ERROR 77716 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'propertiesUtils' defined in file [E:\lean\springboot\hello-spring-boot\target\classes\com\funtl\hello\spring\boot\util\PropertiesUtils.class]: Instantiation of bean failed; nested exception is java.lang.ExceptionInInitializerError
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1307) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1201) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:868) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877) ~[spring-context-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:404) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:319) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132) [spring-boot-test-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:122) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.ExceptionInInitializerError: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_102]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:200) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1299) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	... 40 common frames omitted
+Caused by: java.lang.NullPointerException: null
+	at com.funtl.hello.spring.boot.util.PropertiesUtils.<clinit>(PropertiesUtils.java:32) ~[classes/:na]
+	... 47 common frames omitted
+
+2019-12-02 16:54:13.551 ERROR 77716 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@5c6648b0] to prepare test instance [com.funtl.hello.spring.boot.HelloSpringBootApplicationTests@698fee9a]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:122) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'propertiesUtils' defined in file [E:\lean\springboot\hello-spring-boot\target\classes\com\funtl\hello\spring\boot\util\PropertiesUtils.class]: Instantiation of bean failed; nested exception is java.lang.ExceptionInInitializerError
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1307) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1201) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:868) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877) ~[spring-context-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:404) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:319) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132) ~[spring-boot-test-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	... 24 common frames omitted
+Caused by: java.lang.ExceptionInInitializerError: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_102]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:200) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1299) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	... 40 common frames omitted
+Caused by: java.lang.NullPointerException: null
+	at com.funtl.hello.spring.boot.util.PropertiesUtils.<clinit>(PropertiesUtils.java:32) ~[classes/:na]
+	... 47 common frames omitted
+
+2019-12-02 16:55:19.566  INFO 42868 --- [main] .f.h.s.b.HelloSpringBootApplicationTests : Starting HelloSpringBootApplicationTests on DDZA02434 with PID 42868 (started by apptest1 in E:\lean\springboot\hello-spring-boot)
+2019-12-02 16:55:19.567  INFO 42868 --- [main] .f.h.s.b.HelloSpringBootApplicationTests : No active profile set, falling back to default profiles: default
+2019-12-02 16:55:19.609 DEBUG 42868 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@93081b6
+2019-12-02 16:55:20.208  WARN 42868 --- [main] t.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.funtl.hello.spring.boot]' package. Please check your configuration.
+2019-12-02 16:55:20.225  WARN 42868 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.funtl.hello.spring.boot]' package. Please check your configuration.
+2019-12-02 16:55:20.604  INFO 42868 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-12-02 16:55:21.165  INFO 42868 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-12-02 16:55:21.440  INFO 42868 --- [main] c.f.h.s.boot.quartz.QuartzJobManager     : init jobUtil
+2019-12-02 16:55:21.506  INFO 42868 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-12-02 16:55:21.520  INFO 42868 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-12-02 16:55:21.521  INFO 42868 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.1 created.
+2019-12-02 16:55:21.521  INFO 42868 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-12-02 16:55:21.522  INFO 42868 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.1) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-12-02 16:55:21.522  INFO 42868 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'DefaultQuartzScheduler' initialized from an externally provided properties instance.
+2019-12-02 16:55:21.522  INFO 42868 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.1
+2019-12-02 16:55:21.523  INFO 42868 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: com.funtl.hello.spring.boot.config.TaskJobFactory@2924f1d8
+2019-12-02 16:55:21.549  WARN 42868 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'propertiesUtils' defined in file [E:\lean\springboot\hello-spring-boot\target\classes\com\funtl\hello\spring\boot\util\PropertiesUtils.class]: Instantiation of bean failed; nested exception is java.lang.ExceptionInInitializerError
+2019-12-02 16:55:21.549  INFO 42868 --- [main] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+2019-12-02 16:55:21.549  INFO 42868 --- [main] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+2019-12-02 16:55:21.549  INFO 42868 --- [main] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+2019-12-02 16:55:21.550  INFO 42868 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2019-12-02 16:55:21.552  INFO 42868 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-12-02 16:55:21.560  INFO 42868 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-12-02 16:55:21.564 ERROR 42868 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'propertiesUtils' defined in file [E:\lean\springboot\hello-spring-boot\target\classes\com\funtl\hello\spring\boot\util\PropertiesUtils.class]: Instantiation of bean failed; nested exception is java.lang.ExceptionInInitializerError
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1307) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1201) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:868) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877) ~[spring-context-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:404) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:319) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132) [spring-boot-test-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:122) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.ExceptionInInitializerError: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_102]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:200) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1299) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	... 40 common frames omitted
+Caused by: java.lang.NullPointerException: null
+	at com.funtl.hello.spring.boot.util.PropertiesUtils.<clinit>(PropertiesUtils.java:32) ~[classes/:na]
+	... 47 common frames omitted
+
+2019-12-02 16:55:21.566 ERROR 42868 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@5c6648b0] to prepare test instance [com.funtl.hello.spring.boot.HelloSpringBootApplicationTests@7640a5b1]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:122) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'propertiesUtils' defined in file [E:\lean\springboot\hello-spring-boot\target\classes\com\funtl\hello\spring\boot\util\PropertiesUtils.class]: Instantiation of bean failed; nested exception is java.lang.ExceptionInInitializerError
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1307) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1201) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:868) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877) ~[spring-context-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:404) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:319) ~[spring-boot-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132) ~[spring-boot-test-2.2.0.M3.jar:2.2.0.M3]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124) ~[spring-test-5.2.0.M2.jar:5.2.0.M2]
+	... 24 common frames omitted
+Caused by: java.lang.ExceptionInInitializerError: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_102]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:200) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1299) ~[spring-beans-5.2.0.M2.jar:5.2.0.M2]
+	... 40 common frames omitted
+Caused by: java.lang.NullPointerException: null
+	at com.funtl.hello.spring.boot.util.PropertiesUtils.<clinit>(PropertiesUtils.java:32) ~[classes/:na]
+	... 47 common frames omitted
+
+2019-12-02 17:44:32.640  INFO 51188 --- [main] .f.h.s.b.HelloSpringBootApplicationTests : Starting HelloSpringBootApplicationTests on DDZA02434 with PID 51188 (started by apptest1 in E:\lean\springboot\hello-spring-boot)
+2019-12-02 17:44:32.640  INFO 51188 --- [main] .f.h.s.b.HelloSpringBootApplicationTests : No active profile set, falling back to default profiles: default
+2019-12-02 17:44:32.671 DEBUG 51188 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@78452606
+2019-12-02 17:44:32.802  WARN 51188 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2019-12-02 17:44:33.265  WARN 51188 --- [main] t.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.funtl.hello.spring.boot]' package. Please check your configuration.
+2019-12-02 17:44:33.281  WARN 51188 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.funtl.hello.spring.boot]' package. Please check your configuration.
+2019-12-02 17:44:33.712  INFO 51188 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-12-02 17:44:34.291  INFO 51188 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-12-02 17:44:34.575  INFO 51188 --- [main] c.f.h.s.boot.quartz.QuartzJobManager     : init jobUtil
+2019-12-02 17:44:34.645  INFO 51188 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-12-02 17:44:34.658  INFO 51188 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-12-02 17:44:34.658  INFO 51188 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.1 created.
+2019-12-02 17:44:34.659  INFO 51188 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-12-02 17:44:34.660  INFO 51188 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.1) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-12-02 17:44:34.660  INFO 51188 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'DefaultQuartzScheduler' initialized from an externally provided properties instance.
+2019-12-02 17:44:34.660  INFO 51188 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.1
+2019-12-02 17:44:34.661  INFO 51188 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: com.funtl.hello.spring.boot.config.TaskJobFactory@587a1cfb
+2019-12-02 17:44:35.220 DEBUG 51188 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/**/favicon.ico] in 'faviconHandlerMapping'
+2019-12-02 17:44:35.375  INFO 51188 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-12-02 17:44:35.388 DEBUG 51188 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2019-12-02 17:44:35.451 DEBUG 51188 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 7 mappings in 'requestMappingHandlerMapping'
+2019-12-02 17:44:35.472 DEBUG 51188 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /static/**] in 'resourceHandlerMapping'
+2019-12-02 17:44:35.482 DEBUG 51188 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2019-12-02 17:44:35.586  INFO 51188 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2019-12-02 17:44:35.587  INFO 51188 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2019-12-02 17:44:35.587  INFO 51188 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2019-12-02 17:44:35.587  INFO 51188 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear EntityHelper entityTableMap cache.
+2019-12-02 17:44:35.782  INFO 51188 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-12-02 17:44:35.782  INFO 51188 --- [main] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2019-12-02 17:44:35.788  INFO 51188 --- [main] .f.h.s.b.HelloSpringBootApplicationTests : Started HelloSpringBootApplicationTests in 3.508 seconds (JVM running for 4.3)
+2019-12-02 17:44:36.110 DEBUG 51188 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@78452606, started on Mon Dec 02 17:44:32 CST 2019
+2019-12-02 17:44:36.111  INFO 51188 --- [Thread-2] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+2019-12-02 17:44:36.112  INFO 51188 --- [Thread-2] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-12-02 17:44:36.112  INFO 51188 --- [Thread-2] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+2019-12-02 17:44:36.112  INFO 51188 --- [Thread-2] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+2019-12-02 17:44:36.112  INFO 51188 --- [Thread-2] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+2019-12-02 17:44:36.113  INFO 51188 --- [Thread-2] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2019-12-02 17:44:36.115  INFO 51188 --- [Thread-2] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed

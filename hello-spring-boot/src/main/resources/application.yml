@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: hello-spring-boot
+  thymeleaf:
+    cache: false # 开发时关闭缓存,不然没法看到实时页面
+    mode: HTML # 用非严格的 HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/yb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: root
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      # MySQL 8.x: com.mysql.cj.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  # 配置静态资源路径(默认配置是 static目录下,改成 /static 便于查看 js 与 css)
+  mvc:
+    static-path-pattern: /static/**
+
+# 配置 Mybatis 的 SqLSession 对象
+mybatis:
+  # 实体类的存放路径 x（ml 中 sql 语句传递参数时识别。 id=#{id} ，#{id}的值通过配置映射到数据库识别实体类的属性）
+  type-aliases-package: com.funtl.hello.spring.boot.entity
+  mapper-locations: classpath:mapper/*.xml
+  # 打印 sql 语句
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 9090
+  # servlet:
+    # context-path: /boot
+
+# 打印日志信息
+logging:
+  file: logs/spring-boot-hello.log
+  # 级别
+  level.org.springframework.web: DEBUG
+  level.com.funtl.hello.spring.boot.controller: info
+
+## 自定义jwt key
+#jwt:
+#  tokenHeader: Authorization #JWT存储的请求头
+#  secret: mySecret #JWT加解密使用的密钥
+#  expiration: 604800 #JWT的超期限时间(60*60*24)
+#  tokenHead: Bearer  #JWT负载中拿到开头
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html  "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>spring-boot</title>
+</head>
+<body>
+<!--th 标签代替 jsp里面的 Jstl 并且只能在其他标签里使用 th: 比如 p 标签中，使用的话 必须在页面最上面引入
+    <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+-->
+ <p th:text="${t}">
+     11111111
+ </p>
+<!--th:each 遍历 冒号左边变量名，右边遍历的值  th:text 显示变量值-->
+<ul>
+    <li th:each="name: ${list}" th:text="${name}">
+        列表
+    </li>
+</ul>
+
+</body>
+</html>

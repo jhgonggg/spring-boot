@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funtl.hello.spring.boot.mapper.YbUserMapper">
+  <resultMap id="BaseResultMap" type="com.funtl.hello.spring.boot.entity.YbUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="birth" jdbcType="DATE" property="birth" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="updated" jdbcType="DATE" property="updated" />
+    <result column="is_online" jdbcType="VARCHAR" property="isOnline" />
+    <result column="is_role" jdbcType="INTEGER" property="isRole" />
+  </resultMap>
+
+
+</mapper>

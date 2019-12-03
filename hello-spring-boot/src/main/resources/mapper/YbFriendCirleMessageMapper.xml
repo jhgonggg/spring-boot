@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funtl.hello.spring.boot.mapper.YbFriendCirleMessageMapper">
+  <resultMap id="BaseResultMap" type="com.funtl.hello.spring.boot.entity.YbFriendCirleMessage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="praise_num" jdbcType="INTEGER" property="praiseNum" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+  </resultMap>
+</mapper>

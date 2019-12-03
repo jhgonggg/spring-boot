@@ -1,0 +1,6 @@
+/*td手机端不换行*/
+td{
+    white-space: nowrap;
+}
+
+
