@@ -53,8 +53,8 @@ public class QuartzJobManager {
      * @param jobGroupName   任务所在组名称
      * @param cronExpression cron表达式
      * @throws Exception
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void addJob(Class clazz, String jobName, String jobGroupName, String cronExpression) throws Exception {
 
@@ -83,8 +83,8 @@ public class QuartzJobManager {
      * @param cronExpression cron表达式
      * @param argMap         map形式参数
      * @throws Exception
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void addJob(Class clazz, String jobName, String jobGroupName, String cronExpression, Map<String, Object> argMap) throws Exception {
 
@@ -113,8 +113,8 @@ public class QuartzJobManager {
      * @param jobName      任务名称
      * @param jobGroupName 任务所在组名称
      * @throws SchedulerException
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void pauseJob(String jobName, String jobGroupName) throws SchedulerException {
         scheduler.pauseJob(JobKey.jobKey(jobName, jobGroupName));
@@ -126,8 +126,8 @@ public class QuartzJobManager {
      * @param jobName      任务名称
      * @param jobGroupName 任务所在组名称
      * @throws SchedulerException
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void resumeJob(String jobName, String jobGroupName) throws SchedulerException {
 
@@ -142,8 +142,8 @@ public class QuartzJobManager {
      * @param jobGroupName   任务所在组名称
      * @param cronExpression cron表达式
      * @throws Exception
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void updateJob(String jobName, String jobGroupName, String cronExpression) throws Exception {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);
@@ -169,8 +169,8 @@ public class QuartzJobManager {
      * @param cronExpression cron表达式
      * @param argMap         参数
      * @throws Exception
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void updateJob(String jobName, String jobGroupName, String cronExpression, Map<String, Object> argMap) throws Exception {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);
@@ -197,8 +197,8 @@ public class QuartzJobManager {
      * @param jobGroupName 任务所在组名称
      * @param argMap       参数
      * @throws Exception
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void updateJob(String jobName, String jobGroupName, Map<String, Object> argMap) throws Exception {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);
@@ -220,8 +220,8 @@ public class QuartzJobManager {
      * @param jobName      任务名称
      * @param jobGroupName 任务所在组名称
      * @throws Exception
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void deleteJob(String jobName, String jobGroupName) throws Exception {
         scheduler.pauseTrigger(TriggerKey.triggerKey(jobName, jobGroupName));
@@ -233,8 +233,8 @@ public class QuartzJobManager {
     /**
      * 启动所有定时任务
      *
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void startAllJobs() {
         try {
@@ -247,8 +247,8 @@ public class QuartzJobManager {
     /**
      * 关闭所有定时任务
      *
-     * @author xujingyang
-     * @date 2018/5/30.
+     *
+     *
      */
     public void shutdownAllJobs() {
         try {
