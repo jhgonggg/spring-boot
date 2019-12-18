@@ -3,7 +3,6 @@ package com.funtl.hello.spring.boot.config;
 import lombok.Data;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -23,7 +22,6 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 @Data
-@Profile(value = {"local","dev","default"})
 public class Swagger2Configuration {
 
     private String title = "demo接口文档";
@@ -45,7 +43,7 @@ public class Swagger2Configuration {
                 .apiInfo(apiInfo())
                 .globalResponseMessage(RequestMethod.GET, responseMessageList)
                 .globalResponseMessage(RequestMethod.POST, responseMessageList).select()
-                .apis(RequestHandlerSelectors.basePackage("com.funtl.hello.spring.boot"))
+                .apis(RequestHandlerSelectors.basePackage("com.funtl.hello.spring.boot.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -63,7 +61,7 @@ public class Swagger2Configuration {
                         new Contact("hello",
                                 "http://www.baidu.com",
                                 "******@***.com"))
-                .version("1.0")
+                .version("1.0.0")
                 .build();
     }
 }
