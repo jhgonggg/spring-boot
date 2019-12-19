@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author qy
  * @date 2019/12/3 14:49
- * @description
+ * @description 防止同一个用户 N 秒内一直访问同一个接口
  */
 @Component
 @Slf4j
@@ -72,16 +72,16 @@ public class FangshuaInterceptor extends HandlerInterceptorAdapter {
                 Long visitTimes = redis.increment(key, 1L);
                 //代表是第一次访问，设置超时时间
                 if (visitTimes == 1) {
-                    redis.expire(key, 1, TimeUnit.SECONDS);
+                    redis.expire(key, seconds, TimeUnit.SECONDS);
                     return false;
                     //访问次数超过最大次数
                 } else {
-                    return visitTimes > 20;
+                    return visitTimes > maxCount;
                 }
             } catch (Exception e) {
                 log.error("",e);
             }finally {
-                redis.expire(key,1,TimeUnit.SECONDS);
+                redis.expire(key,seconds,TimeUnit.SECONDS);
             }
         }
 
