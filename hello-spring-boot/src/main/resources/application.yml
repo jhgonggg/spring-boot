@@ -24,7 +24,7 @@ spring:
 
 # 配置 Mybatis 的 SqLSession 对象
 mybatis:
-  # 实体类的存放路径 x（ml 中 sql 语句传递参数时识别。 id=#{id} ，#{id}的值通过配置映射到数据库识别实体类的属性）
+  # 实体类的存放路径 xml 中 sql 语句传递参数时识别。 id=#{id} ，#{id}的值通过配置映射到数据库识别实体类的属性）
   type-aliases-package: com.funtl.hello.spring.boot.entity
   mapper-locations: classpath:mapper/*.xml
   # 打印 sql 语句

@@ -1,0 +1,129 @@
+html,body,div,span,p{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.page_tk{
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tk_wrapper {
+    width: 798px;
+    height: 530px;
+    background: #fff;
+    padding: 10px;
+    font-size: 14px;
+}
+.tk_head {
+    display: flex;
+    justify-content: space-between;
+}
+.tk_content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.tk_foot .btn {
+    float: right;
+    width: 60px;
+    height: 30px;
+    margin-top: 20px;
+    line-height: 30px;
+    background: #007fff;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.tk_search {
+    width: 37%;
+    border-radius: 3px;
+    height: 20px;
+    border: none;
+    padding-left: 4px;
+}
+.tk_list {
+    margin-top: 20px;
+    line-height: 20px;
+}
+.tk_list label {
+    display: block;
+}
+.tk_name {
+    font-weight: bold;
+    vertical-align: top;
+    font-size: 14px;
+}
+.tk_check {
+    vertical-align: super;
+}
+.tk_dw {
+    color: #999;
+    font-size: 12px;
+    width: 180px;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.tk_right_title {
+    border-bottom: 1px solid #eee;
+    height: 20px;
+    line-height: 20px;
+}
+.tk_btn_list {
+}
+.tk_btn {
+    padding: 0 10px;
+    background: #fff;
+    border-radius: 10px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.tk_btn .name {
+    font-weight: bold;
+    margin-right: 5px;
+}
+.btn_dw {
+    font-size: 13px;
+    color: #999;
+    margin-right: 5px;
+}
+.tk_delete {
+    cursor: pointer;
+    padding: 0 3px;
+}
+
+.text {
+    font-size: 14px;
+}
+
+.item {
+    margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+.clearfix:after {
+    clear: both
+}
+
+.box-card {
+    width: 480px;
+}
+
+.active {
+    color: red;
+}

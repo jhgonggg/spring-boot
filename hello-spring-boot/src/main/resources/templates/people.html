@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通讯员</title>
+
+<!--    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+    <link href="/static/assets/css/chalk.css" rel="stylesheet">
+    <link href="/static/assets/css/index.css" rel="stylesheet">
+
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script src="/static/assets/js/vue.js"></script>
+    <script src="/static/assets/js/element-ui.min.js"></script>
+    <script src="/static/assets/js/element-index.js"></script>
+    <script src="/static/assets/js/axios.js"></script>
+    <script src="/static/assets/js/http.js"></script>
+    <script src="/static/assets/js/add.js"></script>
+</head>
+<body>
+
+
+
+<div class="wrapper wrapper-content" id="app" v-cloak>
+
+    <div class="page_tk">
+        <div class="tk_wrapper">
+
+            <div>
+<!--                <el-input v-model.trim="search" @keyup.native="searchPerson" placeholder="输入通讯员名称" maxlength=50-->
+<!--                          size="small" style="cursor: pointer; width: 155px;"></el-input>-->  <!-- 有 native 动态请求-->
+
+                <el-input v-model.trim="search" @keyup="searchPerson" placeholder="输入通讯员名称" maxlength=50
+                          size="small" style="cursor: pointer; width: 155px;"></el-input>
+
+                <!--<input type="text" v-model.trim="search" class="tk_search" placeholder="输入通讯员名称" @keyup="searchPerson" />-->
+
+                <el-button type="small" @click="searchPerson" style="cursor: pointer">搜索</el-button>
+            </div>
+
+            <div class="tk_content">
+
+                <div style="width: 50%;margin-top: -10px;margin-right: 30px;">
+                    <el-card style="max-height: 380px;overflow-y: scroll;">
+                        <div v-for="(item, index) in searchList" class="text item">
+                            <span @click="add(item)" style="cursor: pointer">{{showItem(item)}}</span>
+                        </div>
+                    </el-card>
+                    <p class="btn" style="color: #ccc">
+                        点击名字即可添加
+                    </p>
+                </div>
+
+                <div style="width: 50%;margin-top: -28px;">
+                    <p class="btn" style="color: #ccc">
+                        已添加(点击已添加的通讯员名字即可删除)
+                    </p>
+                    <el-card style="max-height: 350px;overflow-y: scroll;">
+                        <div v-for="(item, index) in rightList" class="text item" :key="item.name + index">
+                            <span @click="deleteRight(item)" style="cursor: pointer">{{showItem(item)}}</span>
+                        </div>
+                    </el-card>
+                </div>
+            </div>
+
+            <div class="tk_foot">
+                <span class="btn" @click="save" style="cursor: pointer">保存</span>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
