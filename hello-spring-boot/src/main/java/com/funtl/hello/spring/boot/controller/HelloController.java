@@ -65,45 +65,7 @@ public class HelloController {
                     "    \"code\": 1100,\n" +
                     "    \"message\": \"成功\",\n" +
                     "    \"requestId\": \"4792a7f218913977d298d814b5c3a67e\",\n" +
-                    "    \"riskLevel\": \"REJECT\",\n" +
-                    "    \"score\": 800,\n" +
-                    "    \"detail\": {\n" +
-                    "        \"description\": \"高风险设备：设备标识为空\",\n" +
-                    "        \"descriptionV2\": \"高风险设备：伪造设备\",\n" +
-                    "        \"hits\": [\n" +
-                    "            {\n" +
-                    "                \"description\": \"高风险设备：设备标识为空\",\n" +
-                    "                \"descriptionV2\": \"高风险设备：伪造设备\",\n" +
-                    "                \"model\": \"M99020202\",\n" +
-                    "                \"riskLevel\": \"REJECT\",\n" +
-                    "                \"score\": 800\n" +
-                    "            },\n" +
-                    "            {\n" +
-                    "                \"description\": \"高风险手机号：命中手机号黑库\",\n" +
-                    "                \"descriptionV2\": \"高风险手机号：农场设备手机号\",\n" +
-                    "                \"model\": \"M99040109\",\n" +
-                    "                \"riskLevel\": \"REJECT\",\n" +
-                    "                \"score\": 797\n" +
-                    "            },\n" +
-                    "            {\n" +
-                    "                \"description\": \"高风险手机号：命中手机号黑库\",\n" +
-                    "                \"descriptionV2\": \"高风险手机号：农场设备手机号\",\n" +
-                    "                \"model\": \"M99040114\",\n" +
-                    "                \"riskLevel\": \"REJECT\",\n" +
-                    "                \"score\": 798\n" +
-                    "            }\n" +
-                    "        ],\n" +
-                    "        \"model\": \"M99020202\",\n" +
-                    "        \"token\": {\n" +
-                    "            \"groupId\": \"\",\n" +
-                    "            \"groupSize\": 0,\n" +
-                    "            \"riskGrade\": \"\",\n" +
-                    "            \"riskReason\": \"\",\n" +
-                    "            \"riskType\": \"\",\n" +
-                    "            \"score\": 0\n" +
-                    "        }\n" +
-                    "    }\n" +
-                    "}";
+                    "    \"riskLevel\": \"REJECT\",\n";
             JSONObject object = JSON.parseObject(data);
             LIST.add(object.getString("riskLevel"));
             return ResponseBuilder.buildSuccess(userDTO);
