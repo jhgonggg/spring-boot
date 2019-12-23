@@ -16,7 +16,6 @@ public final class SysConst {
     public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     public static final long EXPIRE_DEFAULT = 60L * 5;
-    public static final String NFPLUS = "nfplus";
 
     public static final String DOUBLE_QUOTATION = "::";
 

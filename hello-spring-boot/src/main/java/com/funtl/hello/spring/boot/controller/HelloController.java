@@ -11,6 +11,7 @@ import com.funtl.hello.spring.boot.entity.YbUser;
 import com.funtl.hello.spring.boot.mapper.YbUserMapper;
 import com.funtl.hello.spring.boot.response.Response;
 import com.funtl.hello.spring.boot.response.ResponseBuilder;
+import com.funtl.hello.spring.boot.util.IpUtil;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -89,5 +91,10 @@ public class HelloController {
             return object;
         }).collect(Collectors.toList());
         return collect.toString();
+    }
+
+    @GetMapping(value = "ip")
+    public void getIp(HttpServletRequest httpServletRequest){
+        System.out.println("ip--->" + IpUtil.getRemoteAddr(httpServletRequest));
     }
 }

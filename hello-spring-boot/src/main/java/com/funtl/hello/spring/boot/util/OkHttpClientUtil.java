@@ -15,8 +15,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+/**
+ *  @author：Lusifer
+ */
 @Component
 public class OkHttpClientUtil {
+
     private static final int READ_TIMEOUT = 100;
     private static final int CONNECT_TIMEOUT = 60;
     private static final int WRITE_TIMEOUT = 60;
