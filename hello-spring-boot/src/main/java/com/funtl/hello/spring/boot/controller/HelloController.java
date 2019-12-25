@@ -25,6 +25,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public class HelloController {
     private YbUserMapper ybUserMapper;
 
 
-    private  static  final List<String> LIST = Lists.newArrayList();
+    private static final List<String> LIST = Lists.newArrayList();
 
     @GetMapping(value = "hi")
     @ApiResponses({@ApiResponse(code = 200, message = "请求成功", response = UserDTO.class)})
@@ -76,12 +77,12 @@ public class HelloController {
 
     @GetMapping(value = "list")
     public List<String> getList() {
-       return LIST;
+        return LIST;
     }
 
     @GetMapping(value = "find")
     public String find(String name) {
-        Example example=new Example(YbUser.class);
+        Example example = new Example(YbUser.class);
         example.createCriteria().andLike("username", SysConst.PERCENT.concat(name).concat(SysConst.PERCENT));
         List<YbUser> userList = ybUserMapper.selectByExample(example);
         List<JSONObject> collect = userList.stream().map(e -> {
@@ -94,7 +95,15 @@ public class HelloController {
     }
 
     @GetMapping(value = "ip")
-    public void getIp(HttpServletRequest httpServletRequest){
+    public void getIp(HttpServletRequest httpServletRequest) {
         System.out.println("ip--->" + IpUtil.getRemoteAddr(httpServletRequest));
+
+        System.out.println(IpUtil.getInternetIp());
+    }
+
+    @GetMapping(value = "getSortedList")
+    public Mono getSortedList() {
+        // 根据姓名从从大到小排序
+        return Mono.fromCallable(() -> ybUserMapper.selectAll().stream().sorted(Comparator.comparing(YbUser::getUsername).reversed()).collect(Collectors.toList()));
     }
 }
