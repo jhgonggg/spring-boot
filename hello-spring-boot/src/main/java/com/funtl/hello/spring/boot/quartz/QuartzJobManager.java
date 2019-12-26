@@ -102,7 +102,7 @@ public class QuartzJobManager {
                 .withSchedule(scheduleBuilder).build();
 
         //获得JobDataMap，写入数据
-        trigger.getJobDataMap().putAll(argMap);
+        jobDetail.getJobDataMap().putAll(argMap);
 
         scheduler.scheduleJob(jobDetail, trigger);
     }
