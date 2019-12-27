@@ -102,8 +102,8 @@ public class HelloController {
     }
 
     @GetMapping(value = "getSortedList")
-    public Mono getSortedList() {
+    public Mono<Response> getSortedList() {
         // 根据姓名从从大到小排序
-        return Mono.fromCallable(() -> ybUserMapper.selectAll().stream().sorted(Comparator.comparing(YbUser::getUsername).reversed()).collect(Collectors.toList()));
+        return Mono.fromCallable(() -> ResponseBuilder.buildSuccess(ybUserMapper.selectAll().stream().sorted(Comparator.comparing(YbUser::getUsername).reversed()).collect(Collectors.toList())));
     }
 }
