@@ -48,4 +48,16 @@ public class RedisTool {
         return RELEASE_SUCCESS.equals(result);
     }
 
+    /**
+     *   test
+     * @param args
+     */
+    public static void main(String[] args) {
+        Jedis jedis = RedisManager.getJedis();
+        try {
+            boolean lock = tryGetDistributedLock(jedis, "", "", 100);
+        } finally {
+            RedisManager.returnResource(jedis);  // 释放资源、 必须
+        }
+    }
 }

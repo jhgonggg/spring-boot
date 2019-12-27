@@ -33,6 +33,16 @@ public class SpringContextHolder implements ApplicationContextAware {
         return applicationContext.getBean(requiredType);
     }
 
+    public static <T> T getBean(String beanName, Class<T> clazz) {
+        if (null == beanName || "".equals(beanName.trim())) {
+            return null;
+        }
+        if (clazz == null) {
+            return null;
+        }
+        return (T) applicationContext.getBean(beanName, clazz);
+    }
+
     private static void assertApplicationContext() {
         if (SpringContextHolder.applicationContext == null) {
             throw new RuntimeException("applicaitonContext 属性为null,请检查是否注入了 SpringContextHolder!");
