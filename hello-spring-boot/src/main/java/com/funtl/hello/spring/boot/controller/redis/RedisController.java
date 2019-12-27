@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.funtl.hello.spring.boot.entity.YbAgree;
 import com.funtl.hello.spring.boot.enums.AgreeEnum;
 import com.funtl.hello.spring.boot.mapper.YbAgreeMapper;
+import com.funtl.hello.spring.boot.redis.RedisManager;
 import com.funtl.hello.spring.boot.redis.impl.RedisImpl;
 import com.funtl.hello.spring.boot.response.Response;
 import com.funtl.hello.spring.boot.response.ResponseBuilder;
@@ -40,7 +41,7 @@ public class RedisController {
     public Mono<Response> hasAgree(@RequestParam(value = "userId", required = true) Integer userId) {
         return Mono.fromCallable(() -> {
             int hasAgree = 0;
-            if (redis.existMember(AGREE_KEY, userId)) {
+            if (RedisManager.sismember(AGREE_KEY, String.valueOf(userId))) {
                 hasAgree = 1;
             } else {
                 // 查库
@@ -48,7 +49,7 @@ public class RedisController {
                 agree.setUserId(userId);
                 int count = ybAgreeMapper.selectCount(agree);
                 if (count > 0) {
-                    redis.sadd(AGREE_KEY, userId);
+                    RedisManager.sadd(AGREE_KEY, String.valueOf(userId));
                     hasAgree = 1;
                 }
             }
@@ -64,10 +65,10 @@ public class RedisController {
     @ApiOperation(value = "判断用户是否已经勾选协议")
     public Mono<Response> hasAgree2(@RequestParam(value = "userId", required = true) Integer userId) {
         return Mono.fromCallable(() -> {
-            int hasAgree = 0;
-            String value = String.valueOf(redis.hget(HASH_AGREE_KEY, String.valueOf(userId)));
+            String hasAgree = "0";
+            String value = String.valueOf(RedisManager.hget(HASH_AGREE_KEY, String.valueOf(userId)));
             if (StrUtil.equals(AgreeEnum.YES.getType(), value)) {
-                hasAgree = 1;
+                hasAgree = "1";
             } else if (StrUtil.equals(AgreeEnum.NO.getType(), value)) {
 //                hasAgree = 0;
             } else {
@@ -75,8 +76,8 @@ public class RedisController {
                 YbAgree agree = new YbAgree();
                 agree.setUserId(userId);
                 int count = ybAgreeMapper.selectCount(agree);
-                hasAgree = count > 0 ? 1 : 0;
-                redis.hset(HASH_AGREE_KEY, String.valueOf(userId), hasAgree);
+                hasAgree = count > 0 ? "1" : "0";
+                RedisManager.hset(HASH_AGREE_KEY, String.valueOf(userId), hasAgree);
             }
             return ResponseBuilder.buildSuccess(hasAgree);
         });

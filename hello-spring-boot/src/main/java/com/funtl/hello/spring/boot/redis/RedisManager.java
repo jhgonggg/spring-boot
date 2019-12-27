@@ -1,8 +1,9 @@
 package com.funtl.hello.spring.boot.redis;
 
 import com.funtl.hello.spring.boot.util.SpringContextHolder;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.*;
+
+import java.util.*;
 
 /**
  * @author qy
@@ -29,6 +30,839 @@ public class RedisManager {
     }
 
     public static void returnResource(Jedis resource) {
-        getJedisPool().returnResource(resource);
+        if (Objects.nonNull(resource)) {
+            resource.close();
+        }
+    }
+
+
+    public static void hset(String key, String field, String value) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.hset(key, field, value);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static void hset(String key, long id, String value) {
+        hset(key, String.valueOf(id), value);
+    }
+
+    /** 给hash的一个值+1，用于点击数、分享数等 */
+    public static Long hincr(String key, long id) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.hincrBy(key, String.valueOf(id), 1);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /** 给hash的一个值+1，用于点击数、分享数等 */
+    public static Long hincrByString(String key, String id) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.hincrBy(key, id, 1);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /** 给hash的一个值+value，用于点击数、分享数等 */
+    public static Long hincr(String key, long id, Long value) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.hincrBy(key, String.valueOf(id), value);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 从Redis中取出一个值
+     */
+    public static String hget(String key, String field) {
+        Jedis jedis = getJedis();
+        try {
+            if (jedis.hexists(key, field)) {
+                return jedis.hget(key, field);
+            } else {
+                return null;
+            }
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * field是整数时，从Redis中取出一个值
+     */
+    public static String hget(String key, long id) {
+        return hget(key, String.valueOf(id));
+    }
+
+    public static Set<String> hkeys(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.hkeys(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 清空一个值
+     */
+    public static void hclear(String key, String field) {
+        Jedis jedis = getJedis();
+        try {
+            if (jedis.hexists(key, field)) {
+                jedis.hdel(key, field);
+            }
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 清空一个值
+     */
+    public static void hclear(String key, long id) {
+        hclear(key, String.valueOf(id));
+    }
+
+    public static void hclear(String key, String[] field) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.hdel(key, field);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Long hlen(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.hlen(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 设置Key的值，默认保存1小时 需要清理
+     */
+    public static void setClear(String key, String value) {
+        sadd(RedisKey.APP_CLEAR_KEYS_SET, key);
+        set(key, value);
+    }
+
+    /**
+     * 设置Key的值，默认保存1小时
+     */
+    public static void set(String key, String value) {
+        set(key, value, hour1);
+    }
+
+    /**
+     * 设置Key的值，保存比较长的时间，1天
+     */
+    public static void setLonger(String key, String value) {
+        set(key, value, day1);
+    }
+
+    /**
+     * 设置Key的值，保存比较长的时间，1天 用于清理
+     */
+    public static void setLongerClear(String key, String value) {
+        sadd(RedisKey.APP_CLEAR_KEYS_SET, key);
+        setLonger(key, value);
+    }
+
+    /**
+     * 设置Key的值，保存1周
+     */
+    public static void setWeekly(String key, String value) {
+        set(key, value, week1);
+    }
+
+    /**
+     * 设置Key的值，保存1分钟
+     */
+    public static void setOneMinute(String key, String value) {
+        set(key, value, minute1);
+    }
+
+    /**
+     * 设置Key的值，指定过期时间
+     */
+    public static void set(String key, String value, int expireTime) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.setex(key, expireTime, value);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 设置Key的值，无过期时间
+     */
+    public static void setTimeless(String key, String value) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.set(key, value);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 从Redis中取出一个值
+     */
+    public static String get(String key) {
+        Jedis jedis = getJedis();
+        try {
+            if (jedis.exists(key)) {
+                String s = jedis.get(key);
+                return s;
+            } else {
+                return null;
+            }
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 清空一个值
+     */
+    public static void clear(String key) {
+        Jedis jedis = getJedis();
+        try {
+            if (jedis.exists(key)) {
+                jedis.del(key);
+            }
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 清空列表keys，一般是多页  以10为一页
+     */
+    public static void clearKeys(String key) {
+        if (!key.endsWith(".")) {
+            key += ".";
+        }
+        Jedis jedis = getJedis();
+        try {
+            int start = 0;
+            int count = 10;
+            for (int i = 0; i < 20; i++) {
+                String key1 = key + start;
+                start += count;
+                if (jedis.exists(key1)) {
+                    jedis.del(key1);
+                }
+            }
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 彻底清除前缀为key的缓存
+     * @param key
+     */
+    public static void clearKeysTotally(String key) {
+        if (!key.endsWith(".")) {
+            key += ".";
+        }
+        Jedis jedis = getJedis();
+        try {
+            clearKeys(key);
+            Set<String> keys = jedis.keys(key + "*");
+            if(keys.size()>0){
+                for(String keyElem : keys){
+                    jedis.del(keyElem);
+                }
+            }
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 彻底清除前缀为key的缓存 清理set
+     * @param key
+     */
+    public static void clearKeysSet(String key) {
+        Jedis jedis = getJedis();
+        boolean clearFlag = false;
+        try {
+            //每日key删除执行标志   如果不存在，则又到了删多余key的时候了。
+            Long ttl = ttl(RedisKey.CLEAR_KEY_SET_FLAG);
+            if(ttl==-1||ttl==-2){
+                clearFlag = true;
+            }
+            Set<String> keys = jedis.smembers(RedisKey.APP_CLEAR_KEYS_SET);
+            if(keys.size()>0){
+                for(String keyElem : keys){
+                    if(keyElem.startsWith(key)){
+                        jedis.del(keyElem);
+                        jedis.srem(RedisKey.APP_CLEAR_KEYS_SET,keyElem);
+                    }else if(clearFlag){
+                        if(!exists(keyElem)){
+                            jedis.srem(RedisKey.APP_CLEAR_KEYS_SET,keyElem);
+                        }
+                    }
+                }
+            }
+            if(clearFlag){ //1天清一次
+                setLonger(RedisKey.CLEAR_KEY_SET_FLAG, "1");
+            }
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 清除以key为前缀的所有键,比较慢，建议异步使用
+     * @param key
+     */
+    public static void clearKeysByScan(String key) {
+        Jedis jedis = getJedis();
+        try {
+            String cursor = ScanParams.SCAN_POINTER_START;
+            List<String> toBeDel = new ArrayList<>();
+            ScanParams params = new ScanParams();
+            params.match(key+"*");
+            params.count(5000);
+            while(true){
+                ScanResult<String> scan = jedis.scan(cursor, params);
+                toBeDel.addAll(scan.getResult());
+                cursor= scan.getStringCursor();
+                if("0".equals(cursor)){
+                    break;
+                }
+            }
+            if(toBeDel.size()>0){
+                jedis.del(toBeDel.toArray(new String[0]));
+            }
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 清空长列表keys，一个列表按200
+     */
+    public static void clearLongKeys(String key) {
+        if (!key.endsWith(".")) {
+            key += ".";
+        }
+
+        Jedis jedis = getJedis();
+        try {
+
+            int start = 0;
+            int count = 200;
+            for (int i = 0; i < 5; i++) {
+                String key1 = key + start;
+                start += count;
+
+                if (jedis.exists(key1)) {
+                    jedis.del(key1);
+                }
+            }
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 判断一个key是否存在
+     */
+    public static boolean exists(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.exists(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 设置一个key， 添加一个set
+     */
+    public static Long sadd(String key, String... member) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.sadd(key, member);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 设置一个key， 添加一个set
+     */
+    public static Long sadd(String key, int seconds, String... member) {
+        Jedis jedis = getJedis();
+        try {
+            long reply = jedis.sadd(key, member);
+            jedis.expire(key, seconds);
+            return reply;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 判断一个set中的key是否存在
+     */
+    public static Boolean sismember(String key, String member) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.sismember(key, member);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 返回set集合中的所有成员
+     */
+    public static Set<String> smembers(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.smembers(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Boolean hexists(String key, String field) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.hexists(key, field);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Boolean hexists(String key, long field) {
+        return hexists(key, String.valueOf(field));
+    }
+
+    public static Map<String, String> hgetAll(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.hgetAll(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static String hmset(String key, Map<String, String> value) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.hmset(key, value);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static void hmset(String key, Map<String, String> value, int seconds) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.hmset(key, value);
+            jedis.expire(key, seconds);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static void expire(String key, int seconds) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.expire(key, seconds);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static List<String> lrange(String key, long start, long end) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.lrange(key, start, end);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Long rpush(String key, String... strings) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.rpush(key, strings);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static void rpush(String key, int expireTime, String... strings) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.rpush(key, strings);
+            jedis.expire(key, expireTime);
+        }finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static String setex(String key, int seconds, String value) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.setex(key, seconds, value);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Boolean setnx(String key, String value) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.setnx(key, value) == 1;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Long incr(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.incr(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Long decr(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.decr(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Long del(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.del(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+    /**
+     * 设置Key的值，指定过期时间
+     */
+    public static void lpush(String key, int expireTime, String... strings) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.lpush(key, strings);
+            jedis.expire(key, expireTime);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 往队列左边入队一个元素
+     *
+     * @param key
+     * @param strings
+     */
+    public static void lpush(String key, String... strings) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.lpush(key, strings);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 从列左边出队一个元素
+     *
+     * @param key
+     * @return
+     */
+    public static String lpop(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.lpop(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 获取队列长度
+     * @param key
+     * @return
+     */
+    public static Long llen(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.llen(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+
+    /**
+     * 删除key的过期时间
+     * @param key
+     * @return
+     */
+    public static Long persist(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.persist(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 获取所有包含某前缀的key的集合
+     * @param prefixKey 前缀
+     * @return
+     */
+    public static Set<String> getKeysByPrefix(String prefixKey) {
+        if (!prefixKey.endsWith(".")) {
+            prefixKey += ".";
+        }
+        Jedis jedis = getJedis();
+        try {
+            Set<String> keys = jedis.keys(prefixKey + "*");
+            return keys;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 返回set成员长度
+     * @param key
+     * @return
+     */
+    public static long scard(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.scard(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static void zadd(String key, double score, String member) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.zadd(key, score, member);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static void zadd(String key, Map<String, Double> scoreMembers) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.zadd(key,scoreMembers);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static void zrem(String key, String member) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.zrem(key, member);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Long zcard(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.zcard(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Set<String> zrange(String key, long start, long end) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.zrange(key, start, end);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Set<String> zrevrange(String key, long start, long end) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.zrevrange(key, start, end);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static int getMinute1() {
+        return minute1;
+    }
+    public static int getHour1() {
+        return hour1;
+    }
+    public static int getDay1() {
+        return day1;
+    }
+    public static int getWeek1() {
+        return week1;
+    }
+
+    public static List<byte[]> getBlockList(String key, int timeout) throws Exception {
+        Jedis jedis = getJedis();
+        try {
+
+            return jedis.brpop(timeout, key.getBytes());
+        } finally {
+            returnResource(jedis);
+        }
+    }
+    public static Long setList(String key, String value) {
+        Jedis jedis = getJedis();
+        try {
+
+            return jedis.lpush(key.getBytes(), value.getBytes());
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static String getSet(String key, String value) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.getSet(key, value);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static String set(String key, String value, String nxxx, String expx, long time) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.set(key, value, nxxx, expx, time);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Object eval(String script, List<String> keys, List<String> args) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.eval(script, keys, args);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static Set<String> keys(String pattern) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.keys(pattern);
+        }finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static String srandmember(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.srandmember(key);
+        }finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static long srem(String key, String member) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.srem(key, member);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+
+    public static void subscribe(JedisPubSub JedisPubSub, String channel) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.subscribe(JedisPubSub, channel);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static void publish(String channel, String message) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.publish(channel, message);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+    public static Long ttl(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.ttl(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static List<String> mget(String... keys) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.mget(keys);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static String mset(String... keysvalues) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.mset(keysvalues);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static void expireBatch(Set<String> keys, int seconds) {
+        Jedis jedis = getJedis();
+        try {
+            for (String key : keys) {
+                jedis.expire(key, seconds);
+            }
+        } finally {
+            returnResource(jedis);
+        }
     }
 }
