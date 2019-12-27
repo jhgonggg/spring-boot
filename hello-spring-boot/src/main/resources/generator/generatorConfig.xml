@@ -37,7 +37,7 @@
                 type="XMLMAPPER"/>
 
         <!-- 配置需要生成的表，% 代表所有 -->
-        <table catalog="yb" tableName="%">
+        <table catalog="yb" tableName="yb_agree">
             <!-- mysql 配置 主键 id 自增 -->
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>

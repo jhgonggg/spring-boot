@@ -125,6 +125,8 @@ public interface Cache<T> {
 
 	Set<Object> members(String key);
 
+	boolean existMember(String key ,Object value);
+
 	void hset(String key, String field, Object value);
 	void hsets(String key, Map<String, ? extends Object> map);
 	Object hget(String key, String field);

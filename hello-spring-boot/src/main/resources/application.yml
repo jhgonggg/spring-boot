@@ -18,6 +18,13 @@ spring:
       test-on-borrow: true
       # MySQL 8.x: com.mysql.cj.jdbc.Driver
       driver-class-name: com.mysql.cj.jdbc.Driver
+#  redis:
+#      database: 8
+#      host:
+#      password:
+#      port: 6379
+#      timeout: 10s
+
   # 配置静态资源路径(默认配置是 static目录下,改成 /static 便于查看 js 与 css)
   mvc:
     static-path-pattern: /static/**

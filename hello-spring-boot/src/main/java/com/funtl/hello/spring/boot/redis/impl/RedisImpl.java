@@ -139,6 +139,11 @@ public class RedisImpl<K, V> implements Cache<RedisTemplate<K, V>> {
 	}
 
 	@Override
+	public boolean existMember(String key, Object value) {
+		return redisTemplate.boundSetOps(key).isMember(value);
+	}
+
+	@Override
 	public void hset(String key, String field, Object value){
 		 redisTemplate.opsForHash().put(key,field,value);
 	}
