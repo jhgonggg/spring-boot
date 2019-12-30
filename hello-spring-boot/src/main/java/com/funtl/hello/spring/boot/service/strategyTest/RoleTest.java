@@ -1,4 +1,4 @@
-package com.funtl.hello.spring.boot.service.test;
+package com.funtl.hello.spring.boot.service.strategyTest;
 
 import com.funtl.hello.spring.boot.enums.RoleEnum;
 
