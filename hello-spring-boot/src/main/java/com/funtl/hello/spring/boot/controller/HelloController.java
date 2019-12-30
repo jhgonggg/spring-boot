@@ -11,6 +11,7 @@ import com.funtl.hello.spring.boot.entity.YbUser;
 import com.funtl.hello.spring.boot.mapper.YbUserMapper;
 import com.funtl.hello.spring.boot.response.Response;
 import com.funtl.hello.spring.boot.response.ResponseBuilder;
+import com.funtl.hello.spring.boot.service.LoginService;
 import com.funtl.hello.spring.boot.util.IpUtil;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +34,8 @@ import java.util.stream.Collectors;
 public class HelloController {
     @Autowired
     private YbUserMapper ybUserMapper;
+    @Autowired
+    private LoginService loginService;
 
 
     private static final List<String> LIST = Lists.newArrayList();
@@ -97,7 +100,7 @@ public class HelloController {
     @GetMapping(value = "ip")
     public void getIp(HttpServletRequest httpServletRequest) {
         System.out.println("ip--->" + IpUtil.getRemoteAddr(httpServletRequest));
-
+        System.out.println(loginService.login(new YbUser()));
         System.out.println(IpUtil.getInternetIp());
     }
 

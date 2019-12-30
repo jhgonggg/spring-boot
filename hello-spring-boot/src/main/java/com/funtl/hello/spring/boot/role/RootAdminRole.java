@@ -5,7 +5,7 @@ import com.funtl.hello.spring.boot.service.Operate;
 /**
  * @author qy
  * @date 2019/12/20 17:23
- * @description
+ * @description 策略模式
  */
 public class RootAdminRole implements Operate {
     @Override

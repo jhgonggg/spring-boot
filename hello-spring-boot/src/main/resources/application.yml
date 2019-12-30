@@ -56,4 +56,5 @@ logging:
 #  secret: mySecret #JWT加解密使用的密钥
 #  expiration: 604800 #JWT的超期限时间(60*60*24)
 #  tokenHead: Bearer  #JWT负载中拿到开头
-
+cyh:
+  fromSystemCode: "012"      # 0开头八进制 加引号

@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * @author qy
  * @date 2019/12/20 17:37
- * @description
+ * @description 策略执行类
  */
 @Data
 public class RoleContext {

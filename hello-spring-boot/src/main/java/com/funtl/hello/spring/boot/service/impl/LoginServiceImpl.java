@@ -4,6 +4,7 @@ import com.funtl.hello.spring.boot.entity.YbUser;
 import com.funtl.hello.spring.boot.mapper.YbUserMapper;
 import com.funtl.hello.spring.boot.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -20,6 +21,9 @@ public class LoginServiceImpl implements LoginService {
     private static YbUserMapper ybUserMapper2;
 
     private static LoginServiceImpl loginServiceImpl;
+
+    @Value("${cyh.fromSystemCode}")
+    String fromSystemCode;
 
 
     @PostConstruct
@@ -43,6 +47,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public YbUser login(YbUser ybUser) {
+        System.out.println(fromSystemCode);
         Example example=new Example(YbUser.class);
         example.createCriteria().andEqualTo("username", ybUser.getUsername());
         List<YbUser> select = ybUserMapper.selectByExample(example);
