@@ -26,17 +26,10 @@ public class UserDTO {
     private String message;
 
     private String date;
-
+    // 属性大小写问题 首字母
+    @JSONField(name = "USER_ID")
     private String USER_ID;
 
     private String descMap;
 
-    /**
-     * 属性大小写问题 首字母
-     * @return
-     */
-    @JSONField(name = "USER_ID")
-    public String getUSER_ID() {
-        return USER_ID;
-    }
 }
