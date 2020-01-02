@@ -8,6 +8,8 @@ import com.funtl.hello.spring.boot.constant.SysConst;
 import com.funtl.hello.spring.boot.dto.UserDTO;
 import com.funtl.hello.spring.boot.dto.UserVO;
 import com.funtl.hello.spring.boot.entity.YbUser;
+import com.funtl.hello.spring.boot.help.ContentFormatter;
+import com.funtl.hello.spring.boot.help.TokenFormatter;
 import com.funtl.hello.spring.boot.mapper.YbUserMapper;
 import com.funtl.hello.spring.boot.response.Response;
 import com.funtl.hello.spring.boot.response.ResponseBuilder;
@@ -18,7 +20,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -37,6 +41,11 @@ public class HelloController {
     @Autowired
     private LoginService loginService;
 
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addCustomFormatter(new ContentFormatter(), "content");
+        binder.addCustomFormatter(new TokenFormatter(), "userId");
+    }
 
     private static final List<String> LIST = Lists.newArrayList();
 
