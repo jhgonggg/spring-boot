@@ -33,7 +33,7 @@ public class DesUtil {
             byte[] bt;
             try {
                 byte[] buf = Hex.decodeHex(data.toCharArray());
-                bt = decrypt(buf, "foundern".getBytes());
+                bt = decrypt(buf, KEY.getBytes());
             } catch (Exception var3) {
                 return "非法操作";
             }
@@ -45,9 +45,9 @@ public class DesUtil {
     private static byte[] encrypt(byte[] data, byte[] key) throws Exception {
         SecureRandom sr = new SecureRandom();
         DESKeySpec dks = new DESKeySpec(key);
-        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
         SecretKey securekey = keyFactory.generateSecret(dks);
-        Cipher cipher = Cipher.getInstance("DES");
+        Cipher cipher = Cipher.getInstance(DES);
         cipher.init(1, securekey, sr);
         return cipher.doFinal(data);
     }
@@ -55,9 +55,9 @@ public class DesUtil {
     private static byte[] decrypt(byte[] data, byte[] key) throws Exception {
         SecureRandom sr = new SecureRandom();
         DESKeySpec dks = new DESKeySpec(key);
-        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
         SecretKey securekey = keyFactory.generateSecret(dks);
-        Cipher cipher = Cipher.getInstance("DES");
+        Cipher cipher = Cipher.getInstance(DES);
         cipher.init(2, securekey, sr);
         return cipher.doFinal(data);
     }
