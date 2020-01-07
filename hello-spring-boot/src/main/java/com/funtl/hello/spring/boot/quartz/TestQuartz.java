@@ -34,6 +34,12 @@ public class TestQuartz implements BaseTaskJob {
 //        System.out.println(content);
 //        System.out.println(userId);
 
-        //  QuartzJobManager.getInstance().jobdelete(this.getClass().getSimpleName(),"ah");//执行完此任务就删除自己
+        try {
+            //执行完此任务就删除自己
+            QuartzJobManager.getInstance().deleteJob("test1","testQuartz");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

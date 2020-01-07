@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.funtl.hello.spring.boot.constant.SysConst;
 import com.funtl.hello.spring.boot.dto.UserDTO;
-import com.funtl.hello.spring.boot.dto.UserVO;
+import com.funtl.hello.spring.boot.vo.UserVO;
 import com.funtl.hello.spring.boot.entity.YbUser;
 import com.funtl.hello.spring.boot.help.ContentFormatter;
 import com.funtl.hello.spring.boot.help.TokenFormatter;

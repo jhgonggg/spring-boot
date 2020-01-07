@@ -1,4 +1,4 @@
-package com.funtl.hello.spring.boot.dto;
+package com.funtl.hello.spring.boot.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

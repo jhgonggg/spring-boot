@@ -1,6 +1,7 @@
 package com.funtl.hello.spring.boot.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.funtl.hello.spring.boot.entity.YbUser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,5 +32,7 @@ public class UserDTO {
     private String USER_ID;
 
     private String descMap;
+
+    private YbUser user;
 
 }

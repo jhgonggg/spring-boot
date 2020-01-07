@@ -20,6 +20,7 @@ public class TokenThreadLocal {
      * @return
      */
     public static LoginToken getLoginToken() {
+        //注意 ：如果get方法返回值为基本类型，则会报空指针异常，如果是包装类型就不会出错
         return THREADLOCAL.get();
     }
 
