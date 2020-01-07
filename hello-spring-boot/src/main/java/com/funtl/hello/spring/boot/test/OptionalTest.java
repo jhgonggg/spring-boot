@@ -29,13 +29,18 @@ public class OptionalTest {
 //////////////////////////////////////////////////////////////////////////////////////////
 
         UserDTO dto = new UserDTO();
-
+        dto.setMessage("1111");
+        dto.setUser(new YbUser());
         //1
         String s11 = getScore(dto);
         System.out.println(s11);
         //2
         String s22 = Optional.ofNullable(dto).map(UserDTO::getUser).map(YbUser::getUsername).orElse(null);
         System.out.println(s22);
+
+        // 没有 orElse 或者 orElseGet 返回的是 Optional 对象 、 有的话返回的是实体对象
+        System.out.println(Optional.ofNullable(dto).map(UserDTO::getUser));
+        // Optional[YbUser{id=null, username='null', password='null', email='null', gender=null, birth=null, picture='null', created=null, location='null', phone='null', updated=null, isOnline='null', isRole=null}]
     }
 
 

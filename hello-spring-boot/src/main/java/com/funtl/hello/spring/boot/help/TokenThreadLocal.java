@@ -5,14 +5,14 @@ import com.funtl.hello.spring.boot.bean.LoginToken;
 
 public class TokenThreadLocal {
 
-    private static final ThreadLocal<LoginToken> THREADLOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<LoginToken> THREAD_LOCAL = new ThreadLocal<>();
 
     /**
      * 请求前设置当前用户请求的线程副本
      * @param loginToken
      */
     public static void setLoginToken(LoginToken loginToken) {
-        THREADLOCAL.set(loginToken);
+        THREAD_LOCAL.set(loginToken);
     }
 
     /**
@@ -21,17 +21,17 @@ public class TokenThreadLocal {
      */
     public static LoginToken getLoginToken() {
         //注意 ：如果get方法返回值为基本类型，则会报空指针异常，如果是包装类型就不会出错
-        return THREADLOCAL.get();
+        return THREAD_LOCAL.get();
     }
 
     public static String getUserId() {
-        return THREADLOCAL.get().getUserId();
+        return THREAD_LOCAL.get().getUserId();
     }
 
     /**
      * 删除当前用户请求线程的副本
      */
     public static void delLoginToken() {
-        THREADLOCAL.remove();
+        THREAD_LOCAL.remove();
     }
 }
