@@ -11,7 +11,7 @@ import java.security.SecureRandom;
 
 public class DesUtil {
     private static final String DES = "DES";
-    private static final String KEY = "foundern";
+    public static final String KEY = "foundern";
 
 //    public static void main(String[] args) throws Exception {
 //        String data = "fztest";

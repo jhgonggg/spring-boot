@@ -16,41 +16,42 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 public class RequestInterceptor extends HandlerInterceptorAdapter {
-	/**
-	 *  Controller方法处理之前
- 	 */
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		UrlPathHelper urlPathHelper = new UrlPathHelper();
-		String url = urlPathHelper.getLookupPathForRequest(request);
-		if (RequestMethod.OPTIONS.name().equalsIgnoreCase(request.getMethod())) {
-			return super.preHandle(request, response, handler);
-		}
-		String token = request.getHeader("token");
-		if (StringUtils.isNotBlank(token)) {
-			LoginToken loginToken = JSON.parseObject(DesUtil.decrypt(token), LoginToken.class);
-			//  设置 ThreadLocal
-			TokenThreadLocal.setLoginToken(loginToken);
-			log.info("url-->{}, method-->{}, parmer-->{}, loginToken-->{}", url, request.getMethod(), JSON.toJSONString(request.getParameterMap()), loginToken);
-		}
-		return super.preHandle(request, response, handler);
-	}
+    /**
+     * Controller方法处理之前
+     */
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        UrlPathHelper urlPathHelper = new UrlPathHelper();
+        String url = urlPathHelper.getLookupPathForRequest(request);
+        if (RequestMethod.OPTIONS.name().equalsIgnoreCase(request.getMethod())) {
+            return super.preHandle(request, response, handler);
+        }
+        String token = request.getHeader("token");
+        if (StringUtils.isNotBlank(token)) {
+            // 解密
+            LoginToken loginToken = JSON.parseObject(DesUtil.decrypt(token), LoginToken.class);
+            //  设置 ThreadLocal
+            TokenThreadLocal.setLoginToken(loginToken);
+            log.info("url-->{}, method-->{}, param-->{}, loginToken-->{}", url, request.getMethod(), JSON.toJSONString(request.getParameterMap()), loginToken);
+        }
+        return super.preHandle(request, response, handler);
+    }
 
-	/**
-	 * 	Controller方法处理完之后 、试图渲染之前 、可以对ModelAndView进行操作
-	 */
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		super.postHandle(request, response, handler, modelAndView);
-	}
+    /**
+     * Controller方法处理完之后 、试图渲染之前 、可以对ModelAndView进行操作
+     */
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        super.postHandle(request, response, handler, modelAndView);
+    }
 
-	/**
-	 * 视图的渲染之后、多用于清除资源
-	 */
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-		TokenThreadLocal.delLoginToken();  // 手动释放内存，从而避免内存泄漏
+    /**
+     * 视图的渲染之后、多用于清除资源
+     */
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        TokenThreadLocal.delLoginToken();  // 手动释放内存，从而避免内存泄漏
 
-		super.afterCompletion(request, response, handler, ex);
-	}
+        super.afterCompletion(request, response, handler, ex);
+    }
 }

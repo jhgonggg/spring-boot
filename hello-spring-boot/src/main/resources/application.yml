@@ -18,6 +18,7 @@ spring:
       test-on-borrow: true
       # MySQL 8.x: com.mysql.cj.jdbc.Driver
       driver-class-name: com.mysql.cj.jdbc.Driver
+
 #  redis:
 #      database: 8
 #      host:
@@ -58,3 +59,8 @@ logging:
 #  tokenHead: Bearer  #JWT负载中拿到开头
 cyh:
   fromSystemCode: "012"      # 0开头八进制 加引号
+
+#用户登录token有效时间,分钟
+login:
+  valid:
+    time: 1440

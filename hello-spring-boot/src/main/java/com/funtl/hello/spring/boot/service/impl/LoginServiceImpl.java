@@ -6,6 +6,8 @@ import com.funtl.hello.spring.boot.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.DigestUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.PostConstruct;
@@ -51,21 +53,20 @@ public class LoginServiceImpl implements LoginService {
         Example example=new Example(YbUser.class);
         example.createCriteria().andEqualTo("username", ybUser.getUsername());
         List<YbUser> select = ybUserMapper.selectByExample(example);
-        System.out.println(select);
-        YbUser user=select.get(0);
         //账户错误
-        if(user==null){
+        if(CollectionUtils.isEmpty(select)){
             //  TODO ,,,
         }
         else{
+            YbUser user = select.get(0);
             //密码正确
-//            if(user.getPassword().equals(DigestUtils.md5DigestAsHex(ybUser.getPassword().getBytes()))){
-//                return user;
-//            }
-//            //密码错误
-//            else {
-//                //  TODO ...
-//            }
+            if(user.getPassword().equals(DigestUtils.md5DigestAsHex(ybUser.getPassword().getBytes()))){
+                return user;
+            }
+            //密码错误
+            else {
+                //  TODO ...
+            }
         }
         return null;
     }
