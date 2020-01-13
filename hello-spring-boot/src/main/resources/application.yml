@@ -60,7 +60,7 @@ logging:
 cyh:
   fromSystemCode: "012"      # 0开头八进制 加引号
 
-#用户登录token有效时间,分钟
+#用户登录token有效时间,秒
 login:
   valid:
-    time: 1440
+    time: 86400

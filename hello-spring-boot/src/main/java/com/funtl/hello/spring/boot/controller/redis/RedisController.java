@@ -5,7 +5,6 @@ import com.funtl.hello.spring.boot.entity.YbAgree;
 import com.funtl.hello.spring.boot.enums.AgreeEnum;
 import com.funtl.hello.spring.boot.mapper.YbAgreeMapper;
 import com.funtl.hello.spring.boot.redis.RedisManager;
-import com.funtl.hello.spring.boot.redis.impl.RedisImpl;
 import com.funtl.hello.spring.boot.response.Response;
 import com.funtl.hello.spring.boot.response.ResponseBuilder;
 import io.swagger.annotations.ApiOperation;
@@ -28,8 +27,7 @@ import reactor.core.publisher.Mono;
  */
 @RestController(value = "redis")
 public class RedisController {
-    @Autowired
-    private RedisImpl redis;
+
     @Autowired
     private YbAgreeMapper ybAgreeMapper;
 
@@ -63,14 +61,14 @@ public class RedisController {
 
     @GetMapping(value = "/hasAgree2")
     @ApiOperation(value = "判断用户是否已经勾选协议")
-    public Mono<Response> hasAgree2(@RequestParam(value = "userId", required = true) Integer userId) {
+    public Mono<Response> hasAgree2(@RequestParam(value = "userId") Integer userId) {
         return Mono.fromCallable(() -> {
-            String hasAgree = "0";
+            String hasAgree;
             String value = String.valueOf(RedisManager.hget(HASH_AGREE_KEY, String.valueOf(userId)));
             if (StrUtil.equals(AgreeEnum.YES.getType(), value)) {
                 hasAgree = "1";
             } else if (StrUtil.equals(AgreeEnum.NO.getType(), value)) {
-//                hasAgree = 0;
+                hasAgree = "0";
             } else {
                 // 查库
                 YbAgree agree = new YbAgree();
