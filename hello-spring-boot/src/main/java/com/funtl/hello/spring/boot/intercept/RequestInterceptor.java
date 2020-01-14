@@ -14,6 +14,7 @@ import org.springframework.web.util.UrlPathHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Slf4j
 @Order(0)
@@ -32,7 +33,13 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
         String token = request.getHeader("token");
         if (StringUtils.isNotBlank(token)) {
             // 解密
-            LoginToken loginToken = JSON.parseObject(DesUtil.decrypt(token), LoginToken.class);
+            LoginToken loginToken;
+            try {
+                loginToken = JSON.parseObject(DesUtil.decrypt(token), LoginToken.class);
+            } catch (IOException e) {
+                log.error("请求拦截器解析token异常, e-->{}, token-->{}", e, token);
+                throw new RuntimeException("用户未登录或 token 已失效");
+            }
             //  设置 ThreadLocal
             TokenThreadLocal.setLoginToken(loginToken);
             log.info("url-->{}, method-->{}, param-->{}, loginToken-->{}", url, request.getMethod(), JSON.toJSONString(request.getParameterMap()), loginToken);

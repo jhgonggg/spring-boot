@@ -44,16 +44,16 @@ public class OptionalTest {
         System.out.println(Optional.ofNullable(dto).map(UserDTO::getUser));
         // Optional[YbUser{id=null, username='null', password='null', email='null', gender=null, birth=null, picture='null', created=null, location='null', phone='null', updated=null, isOnline='null', isRole=null}]
         System.out.println("==================================");
-        String jsons ="[{\"area\":\"广州\",\"unit\":\"南方\",\"createTime\":1578562612000,\"phone\":\"15678961234\",\"name\":\"\",\"description\":\"你好8\",\"avatar\":\"http://devpic.nfapp.southcn.com/report/image/201910/21/e3c6167ddc09408e8b3a4f9b2b9fa503.jpg\",\"dept\":\"南方加\",\"id\":148,\"type\":1,\"userId\":\"test\",\"status\":0}]\n";
+        String jsons ="[{\"phone\":\"15678961234\",\"name\":\"百度\",\"userId\":\"test\",\"status\":0}]\n";
         JSONArray array = JSONArray.parseArray(jsons);
         System.out.println(array);  // array ---> jsons 为 "" 时 null 。jsons 为 null 时 null , array 也不会赋值为 new JsonArray()
         // 当 array 为 [] 时 ，不会遍历
         Optional.ofNullable(array).orElseGet(JSONArray::new).forEach(e -> {
-                JSONObject json = (JSONObject) e;
-                String name = json.getString("name");
-                System.out.println(name);
-                json.put("initials", PinyinUtil.getPinYinHeadChar(json.getString("name")));
-                json.put("pinyin", PinyinUtil.getPingYin(json.getString("name")));
+            JSONObject json = (JSONObject) e;
+            String name = json.getString("name");
+            System.out.println(name);
+            json.put("initials", PinyinUtil.getPinYinHeadChar(json.getString("name")));
+            json.put("pinyin", PinyinUtil.getPingYin(json.getString("name")));
         });
 
 
