@@ -49,7 +49,7 @@ logging:
   file: logs/spring-boot-hello.log
   # 级别
   level.org.springframework.web: DEBUG
-  level.com.funtl.hello.spring.boot.controller: info
+  level.com.funtl.hello.spring.boot: info
 
 ## 自定义jwt key
 #jwt:

@@ -1,10 +1,16 @@
 package com.funtl.hello.spring.boot.intercept;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.funtl.hello.spring.boot.annotation.AccessLimit;
+import com.funtl.hello.spring.boot.help.TokenThreadLocal;
+import com.funtl.hello.spring.boot.redis.RedisKey;
+import com.funtl.hello.spring.boot.redis.RedisManager;
 import com.funtl.hello.spring.boot.redis.impl.RedisImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -21,12 +27,15 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 @Slf4j
+@Order(1)
 public class FangshuaInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private RedisImpl redis;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        log.info("第二执行");
+
         //判断请求是否属于方法的请求
         if (handler instanceof HandlerMethod) {
 
@@ -41,15 +50,21 @@ public class FangshuaInterceptor extends HandlerInterceptorAdapter {
             int maxCount = accessLimit.maxCount();
             boolean login = accessLimit.needLogin();
             String key = request.getRequestURI();
-            String userId = request.getParameter("userId");
+            String userId = TokenThreadLocal.getUserId();
             //如果需要登录
             if (login) {
                 //获取登录的session进行判断
-                //.....
-//                if ("未登录"){
-//                    return false;
-//                }
-                key += "" + userId;  //项目中是动态获取的userId
+                String sessionId = RedisManager.get(RedisKey.USER_SESSION_KEY);
+                String nowSessionId = request.getSession().getId();
+                if (StrUtil.equals(nowSessionId, sessionId)) {
+                    if (StringUtils.isNotBlank(userId)) {
+                        key += "" + userId;  //项目中是动态获取的userId
+                    } else {
+                        return false;
+                    }
+                } else {
+                    throw new RuntimeException("账号已在别处登录");
+                }
             }
 /////////////////////////////////////////////////////////////////////
             //  不能这么写
@@ -79,9 +94,9 @@ public class FangshuaInterceptor extends HandlerInterceptorAdapter {
                     return visitTimes > maxCount;
                 }
             } catch (Exception e) {
-                log.error("",e);
-            }finally {
-                redis.expire(key,seconds,TimeUnit.SECONDS);
+                log.error("redis 异常", e);
+            } finally {
+                redis.expire(key, seconds, TimeUnit.SECONDS);
             }
         }
 

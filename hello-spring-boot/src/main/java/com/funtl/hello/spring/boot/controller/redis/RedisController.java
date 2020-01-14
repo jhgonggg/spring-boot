@@ -7,6 +7,7 @@ import com.funtl.hello.spring.boot.mapper.YbAgreeMapper;
 import com.funtl.hello.spring.boot.redis.RedisManager;
 import com.funtl.hello.spring.boot.response.Response;
 import com.funtl.hello.spring.boot.response.ResponseBuilder;
+import com.google.common.collect.ImmutableMap;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +80,7 @@ public class RedisController {
                 hasAgree = count > 0 ? "1" : "0";
                 RedisManager.hset(HASH_AGREE_KEY, String.valueOf(userId), hasAgree);
             }
-            return ResponseBuilder.buildSuccess(hasAgree);
+            return ResponseBuilder.buildSuccess(ImmutableMap.of("hasAgree", hasAgree));
         });
     }
 

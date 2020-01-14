@@ -1,4 +1,4 @@
-package com.funtl.hello.spring.boot.config;
+package com.funtl.hello.spring.boot.intercept;
 
 import com.alibaba.fastjson.JSON;
 import com.funtl.hello.spring.boot.bean.LoginToken;
@@ -6,6 +6,7 @@ import com.funtl.hello.spring.boot.help.TokenThreadLocal;
 import com.funtl.hello.spring.boot.util.DesUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -15,12 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
+@Order(0)
 public class RequestInterceptor extends HandlerInterceptorAdapter {
     /**
      * Controller方法处理之前
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        log.info("第一执行");
         UrlPathHelper urlPathHelper = new UrlPathHelper();
         String url = urlPathHelper.getLookupPathForRequest(request);
         if (RequestMethod.OPTIONS.name().equalsIgnoreCase(request.getMethod())) {
