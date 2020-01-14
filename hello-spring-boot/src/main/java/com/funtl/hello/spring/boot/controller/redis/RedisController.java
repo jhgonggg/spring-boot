@@ -8,8 +8,10 @@ import com.funtl.hello.spring.boot.redis.RedisManager;
 import com.funtl.hello.spring.boot.response.Response;
 import com.funtl.hello.spring.boot.response.ResponseBuilder;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -81,4 +83,21 @@ public class RedisController {
         });
     }
 
+
+    @PostMapping(value = "saveAgree")
+    public Mono<Response> saveAgree(@RequestParam("userId") Integer userId) {
+        return Mono.fromCallable(() -> {
+            String value = RedisManager.hget(HASH_AGREE_KEY, String.valueOf(userId));
+            if (StringUtils.equals(AgreeEnum.YES.getType(), value)) {
+                return ResponseBuilder.buildSuccess("已勾选用户协议");
+            } else {
+                // 数据库勾选
+                YbAgree ybAgree = new YbAgree();
+                ybAgree.setUserId(userId);
+                int insert = ybAgreeMapper.insertSelective(ybAgree);
+                RedisManager.hset(HASH_AGREE_KEY, String.valueOf(userId), insert > 0 ? "1" : "0");
+                return insert > 0 ? ResponseBuilder.buildSuccess() : ResponseBuilder.buildFail();
+            }
+        });
+    }
 }
