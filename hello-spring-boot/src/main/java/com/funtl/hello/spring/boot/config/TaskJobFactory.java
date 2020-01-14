@@ -16,7 +16,7 @@ public class TaskJobFactory extends AdaptableJobFactory {
 
     @Autowired
     private AutowireCapableBeanFactory capableBeanFactory;
-
+    // 创建定时任务对象
     @Override
     protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception {
         //调用父类的方法

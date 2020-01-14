@@ -17,7 +17,6 @@ public abstract class BaseEntity implements Serializable {
 
     public <T> T convertExt(Class<T> clazz) {
         String json = JSON.toJSONString(this);
-        T t = JSON.parseObject(json, clazz);
-        return t;
+        return JSON.parseObject(json, clazz);
     }
 }
