@@ -56,7 +56,11 @@ public class HelloController {
         JSONArray array = JSONArray.parseArray(dto.getInfo());
         array.forEach(e -> {
             System.out.println(e);
+            // 1
             JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(e));
+            // 2
+            JSONObject json = (JSONObject) e;
+            // 3
             YbUser ybUser = JSON.parseObject(JSON.toJSONString(e), YbUser.class);
             System.out.println(ybUser);
             System.out.println(jsonObject);
