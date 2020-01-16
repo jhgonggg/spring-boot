@@ -53,6 +53,13 @@ public class Test {
 
     }
 
+    /**
+     * 线程通信
+     * 1. Synchronized 同步通信
+     * 2. while 轮训方式
+     * 3. notify/wait 机制
+     * 4. 管道通信机制 PipedOutputStream 、 PipedInputStream
+     */
     public static class MyFairLock extends Thread{
 
         private ReentrantLock lock = new ReentrantLock(true);  // 默认非公平 true 代表公平 false 代表 非公平
@@ -74,6 +81,7 @@ public class Test {
             };
             for(int i = 0;i < 10;i++){
                 new Thread(runnable).start();
+                // 线程启动 通过Runnable
             }
         }
     }
