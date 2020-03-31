@@ -19,5 +19,11 @@ public final class SysConst {
 
     public static final String DOUBLE_QUOTATION = "::";
 
+    public static final String PIC_ID = "pic-id";
+
+    public static final String PIC_SRC = "src";
+
+    public static final String BODY = "body";
+
 
 }
