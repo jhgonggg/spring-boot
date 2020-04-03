@@ -1,6 +1,7 @@
 package com.funtl.hello.spring.boot.util;
 
 import com.funtl.hello.spring.boot.enums.BootEnum;
+import lombok.Data;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -8,29 +9,15 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-
+@Data
 public class EnumsUtils {
 
+    @Data
     private static class EnumsMap {
 
         private Integer code;
         private String name;
 
-        public Integer getCode() {
-            return code;
-        }
-
-        public void setCode(Integer code) {
-            this.code = code;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
     }
 
     public static List<EnumsMap> convert(String className) {
@@ -39,10 +26,10 @@ public class EnumsUtils {
         try {
             Class<?> aClass = ClassUtils.getClass(classString);
             if (aClass.isEnum()) {
-                Class<Enum> enumClass = (Class<Enum>) aClass;
-                EnumSet enums = EnumSet.allOf(enumClass);
+                EnumSet enums = EnumSet.allOf((Class<Enum>) aClass);
                 enums.forEach(e -> {
                     try {
+                        // fieldName 对应枚举类字段
                         Object code = FieldUtils.readDeclaredField(e, "code", true);
                         Object name = FieldUtils.readDeclaredField(e, "name", true);
                         EnumsMap emap = new EnumsMap();

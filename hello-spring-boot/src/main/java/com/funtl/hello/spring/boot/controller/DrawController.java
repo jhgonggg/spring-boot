@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
 public class DrawController {
 
     @GetMapping("/list/{enumName}")
-    @ApiOperation(value = "枚举类下拉列表 ,通过传入枚举类的类名来返回枚举集合 如: RoleEnum")
+    @ApiOperation(value = "枚举类下拉列表 ,通过传入枚举类的类名来返回枚举集合 如: AgreeEnum")
     public Mono<Response> listByEnumName(@PathVariable(name = "enumName") @ApiParam(value = "枚举类名称") String enumName) {
         return Mono.fromCallable(() -> ResponseBuilder.buildSuccess(EnumsUtils.convert(enumName)));
     }
