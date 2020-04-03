@@ -1,17 +1,11 @@
 package com.funtl.hello.spring.boot;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.funtl.hello.spring.boot.entity.Correspondent;
-import com.funtl.hello.spring.boot.util.OkHttpClientUtil;
-import com.google.common.collect.Maps;
-import okhttp3.Response;
+import cn.hutool.core.collection.IterUtil;
+import com.google.common.collect.Lists;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author qy
@@ -21,17 +15,36 @@ import java.util.Objects;
 public class psvm{
 
     public static void main(String[] args) throws IOException {
-        String url ="http://localhost:28088/nfplus-report-conduct-admin/api/getCorrespondent";
-        Map map = Maps.newHashMap();
-        map.put("name","小li");
-        Response data = OkHttpClientUtil.getInstance().postData(url,map);
-        String jsonString = Objects.requireNonNull(data.body()).string();
-        JSONObject jsonObject = JSONObject.parseObject(jsonString);
-        JSONArray array=  jsonObject.getJSONArray("data");
-        List<Correspondent> list = JSON.parseArray(JSONArray.toJSONString(array), Correspondent.class);
 
-        System.out.println(list);
+        List<Integer> list1 = Lists.newArrayList();
+        list1.add(1);
+        list1.add(2);
+        list1.add(3);
+        list1.add(6);
+
+        List<Integer> list2 = Lists.newArrayList();
+        list2.add(2);
+        list2.add(3);
+        list2.add(6);
+        AtomicInteger y = new AtomicInteger();
+        list1.forEach(integer -> {
+            if (IterUtil.isNotEmpty(list2)){
+                y.getAndIncrement();
+                for (Integer integer1 : list2) {
+                    y.getAndIncrement();
+                    if (integer.equals(integer1)) {
+                        System.out.println(integer1);
+                        list2.remove(integer1);
+                        break;
+                    }
+                }
+            }
+
+        });
 
 
+        System.out.println(list2);
+
+        System.out.println(y + "次数");
     }
 }

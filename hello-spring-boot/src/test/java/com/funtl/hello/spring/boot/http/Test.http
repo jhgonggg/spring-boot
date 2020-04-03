@@ -1,0 +1,42 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection) or
+# paste cURL into the file and request will be converted to HTTP Request format.
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+GET http://127.0.0.1:9090/api/draw/list/AgreeEnum
+Content-Type: application/json
+#Authorization: "eyJhdHRhY2giOiIiLCJuaWNrbmFtZSI6IuWQtOS_iuS5kCIsInJhbmRvbSI6ImtUeU1nY0tka2N4YmVuUkFmVWF1Iiwicm9sZUF0dGFjaCI6IlNVUEVSX0FETUlOIiwidGltZXN0YW1wIjoxNTgyMjk0NjMxMDU2LCJ0b2tlbiI6ImRiODE5NDE4YzczZWU0NDJmYzYwNzRjYjI3MDIxODcxMjIyMDVlZWE5MzA3NWE5YTExNjg2ODM1MzQ2YzI1ODJlNTFiZGE3ZTI5ODk5Zjc4YTM0MDg0Y2UxMzM0MzQ5MGQxYzFmNDIxNmVkZDk5MTBiN2IxMDg2MDIzMjRlNTRkIiwidHlwZSI6IjAiLCJ1c2VybmFtZSI6IjE1OTIwOTIwMzUwIiwidXVpZCI6IjM0NmEwMmVhNDY1NTQ1M2RhOThhY2M0ZThhMDhhNTc2In0"
+
+###
+GET http://127.0.0.1:9090/find?name=1
+Content-Type: application/json
+
+
+###
+GET http://127.0.0.1:9090/hi
+Content-Type: application/json
+# requestBody接收时 下面这样传 ,post 请求必须 RequestBody
+
+{
+  "username": "123",
+  "password": "123",
+  "info": [
+    {
+      "name": "a1",
+      "id": 14
+    },
+    {
+      "name": "b1",
+      "id": 15
+    }
+  ]
+}
+
+###
+GET http://127.0.0.1:9090/list
+Content-Type: application/json
+
+###

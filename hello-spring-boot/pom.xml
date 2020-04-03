@@ -30,10 +30,10 @@
             <scope>test</scope>
         </dependency>
         <!--Thymeleaf 模板引擎-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+<!--        </dependency>-->
         <!--Thymeleaf 严格遵循 w3c 规则 引入 nekohtml 后不需要严格遵循 高度容错性-->
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>

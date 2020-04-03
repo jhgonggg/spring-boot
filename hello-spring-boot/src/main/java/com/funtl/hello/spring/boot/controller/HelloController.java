@@ -21,10 +21,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import tk.mybatis.mapper.entity.Example;
 
@@ -51,7 +48,7 @@ public class HelloController {
 
     @GetMapping(value = "hi")
     @ApiResponses({@ApiResponse(code = 200, message = "请求成功", response = UserDTO.class)})
-    public UserVO hello(UserDTO dto) {
+    public UserVO hello(@RequestBody UserDTO dto) {
         JSONObject content = JSON.parseObject(JSON.toJSONString(dto));
         JSONArray array = JSONArray.parseArray(dto.getInfo());
         array.forEach(e -> {
