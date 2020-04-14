@@ -5,8 +5,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.funtl.hello.spring.boot.dto.UserDTO;
 import com.funtl.hello.spring.boot.entity.YbUser;
 import com.funtl.hello.spring.boot.util.PinyinUtil;
+import com.google.common.collect.Lists;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author qy
@@ -14,6 +20,26 @@ import java.util.Optional;
  * @description
  */
 public class OptionalTest {
+
+    private static final List<YbUser> LIST = Lists.newArrayList();
+
+    static {
+        YbUser user = new YbUser();
+        user.setId(1L);
+        LIST.add(user);
+        YbUser user2 = new YbUser();
+        user2.setId(2L);
+        LIST.add(user2);
+    }
+
+    private static final List<Integer> LIST2;
+
+    static {
+        LIST2 = new ArrayList<Integer>() {{
+            add(1);
+            add(2);
+        }};
+    }
 
     public static void main(String[] args) {
 
@@ -44,7 +70,7 @@ public class OptionalTest {
         System.out.println(Optional.ofNullable(dto).map(UserDTO::getUser));
         // Optional[YbUser{id=null, username='null', password='null', email='null', gender=null, birth=null, picture='null', created=null, location='null', phone='null', updated=null, isOnline='null', isRole=null}]
         System.out.println("==================================");
-        String jsons ="[{\"phone\":\"15678961234\",\"name\":\"百度\",\"userId\":\"test\",\"status\":0}]\n";
+        String jsons = "[{\"phone\":\"15678961234\",\"name\":\"百度\",\"userId\":\"test\",\"status\":0}]\n";
         JSONArray array = JSONArray.parseArray(jsons);
         System.out.println(array);  // array ---> jsons 为 "" 时 null 。jsons 为 null 时 null , array 也不会赋值为 new JsonArray()
         // 当 array 为 [] 时 ，不会遍历
@@ -56,7 +82,11 @@ public class OptionalTest {
             json.put("pinyin", PinyinUtil.getPingYin(json.getString("name")));
         });
 
+        // 转换成 Map
+        Map<Long, YbUser> map = LIST.stream().collect(Collectors.toMap(YbUser::getId, Function.identity(), (k, v) -> v));
 
+        System.out.println(map);
+        System.out.println(LIST2);
     }
 
 
