@@ -25,5 +25,9 @@ public final class SysConst {
 
     public static final String BODY = "body";
 
+    public static final int ZERO = 0;
+
+    public static final int ONE = 1;
+
 
 }
