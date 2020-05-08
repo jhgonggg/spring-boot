@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://127.0.0.1:9090/list
+GET http://127.0.0.1:8080/nfplus-copyright-admin/init/data?begin=2019/11/01&end=2019/11/02
 Content-Type: application/json
 
 ###
