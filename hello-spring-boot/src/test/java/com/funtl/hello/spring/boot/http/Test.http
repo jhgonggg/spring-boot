@@ -6,17 +6,17 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-GET http://127.0.0.1:9090/api/draw/list/AgreeEnum
+GET {{host}}/api/draw/list/AgreeEnum
 Content-Type: application/json
 #Authorization: "eyJhdHRhY2giOiIiLCJuaWNrbmFtZSI6IuWQtOS_iuS5kCIsInJhbmRvbSI6ImtUeU1nY0tka2N4YmVuUkFmVWF1Iiwicm9sZUF0dGFjaCI6IlNVUEVSX0FETUlOIiwidGltZXN0YW1wIjoxNTgyMjk0NjMxMDU2LCJ0b2tlbiI6ImRiODE5NDE4YzczZWU0NDJmYzYwNzRjYjI3MDIxODcxMjIyMDVlZWE5MzA3NWE5YTExNjg2ODM1MzQ2YzI1ODJlNTFiZGE3ZTI5ODk5Zjc4YTM0MDg0Y2UxMzM0MzQ5MGQxYzFmNDIxNmVkZDk5MTBiN2IxMDg2MDIzMjRlNTRkIiwidHlwZSI6IjAiLCJ1c2VybmFtZSI6IjE1OTIwOTIwMzUwIiwidXVpZCI6IjM0NmEwMmVhNDY1NTQ1M2RhOThhY2M0ZThhMDhhNTc2In0"
 
 ###
-GET http://127.0.0.1:9090/find?name=1
+GET {{host}}/find?name=1
 Content-Type: application/json
 
 
 ###
-GET http://127.0.0.1:9090/hi
+GET {{host}}/hi
 Content-Type: application/json
 # requestBody接收时 下面这样传 ,post 请求必须 RequestBody
 
@@ -35,8 +35,10 @@ Content-Type: application/json
   ]
 }
 
-###
-GET http://127.0.0.1:8080/nfplus-copyright-admin/init/data?begin=2019/11/01&end=2019/11/02
-Content-Type: application/json
+### post 参数接收
+//api调用审核接口
+POST {{host}}/record/api/review
+Content-Type: application/x-www-form-urlencoded
+token: {{token}}
 
-###
+recordId=8409&reviewStatus=1
