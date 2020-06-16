@@ -22,14 +22,18 @@ public class HuToolHtmlTest {
         Document doc = Jsoup.parse(content);
         doc.outputSettings(new Document.OutputSettings().prettyPrint(false));
         System.out.println(doc);
+        // 获取标签对应的值
         Elements elements = doc.getElementsByTag("img");
         System.out.println(elements);
         System.out.println(elements.size());
         Optional.of(elements).ifPresent(e->{
             e.forEach(element -> {
+                // 获取属性对应的值
                 String picId = element.attr(SysConst.PIC_ID);
                 System.out.println(picId);
+                //  给对应属性赋值
                 element.attr(SysConst.PIC_SRC, "222222222");
+                // 一处对应的属性
                 element.removeAttr(SysConst.PIC_ID);
                 System.out.println(element);
                 element.remove();
@@ -37,7 +41,7 @@ public class HuToolHtmlTest {
             });
         });
         System.out.println(elements);
-
+        // 获取对应的值 去除 html 标签
         String unescape = HtmlUtil.unescape(doc.getElementsByTag(SysConst.BODY).html());
 
         System.out.println(unescape);
