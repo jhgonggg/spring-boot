@@ -12,10 +12,10 @@ import tk.mybatis.spring.annotation.MapperScan;
 //  告诉 Mybatis 数据访问接口的位置,让 Mybatis 与关系对象映射文件做匹配 用来操作mapper的业务 导入的包必须是 import tk.mybatis.spring.annotation.MapperScan 否则报错
 @MapperScan(basePackages = "com.funtl.hello.spring.boot.mapper")
 @EnableSwagger2
-public class HelloSpringBootApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(HelloSpringBootApplication.class, args);
+        SpringApplication.run(Application.class, args);
 
         Object bean = SpringContextHolder.getBean(Environment.class);
         System.out.println(bean);

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 /* classes = HelloSpringBootApplication.class 为了加载 application.yml 的配置*/
-@SpringBootTest(classes = HelloSpringBootApplication.class)
+@SpringBootTest(classes = Application.class)
 public class YbUserMapperTest {
     @Autowired
     private YbUserMapper ybUserMapper;

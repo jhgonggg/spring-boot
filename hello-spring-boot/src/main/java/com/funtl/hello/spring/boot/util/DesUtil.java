@@ -19,13 +19,14 @@ public class DesUtil {
 //        System.err.println(decrypt(encrypt(data, "foundern")));
 //        System.out.println(Hex.encodeHex("J1lThTPwbliDUE4wxdbutQ==".getBytes()));
 //    }
-
+    // 加密
     public static String encrypt(String data, String password) throws Exception {
         byte[] bt = encrypt(data.getBytes(), password.getBytes());
         String strs = new String(Hex.encodeHex(bt));
         return strs;
     }
 
+    // 解密
     public static String decrypt(String data) throws IOException {
         if (data == null) {
             return null;

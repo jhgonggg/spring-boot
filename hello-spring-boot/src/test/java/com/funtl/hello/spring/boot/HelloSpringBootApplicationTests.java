@@ -16,7 +16,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 /* classes = HelloSpringBootApplication.class 为了加载 application.yml 的配置*/
-@SpringBootTest(classes = HelloSpringBootApplication.class)
+@SpringBootTest(classes = Application.class)
 public class HelloSpringBootApplicationTests {
     @Autowired
     private YbUserMapper ybUserMapper;

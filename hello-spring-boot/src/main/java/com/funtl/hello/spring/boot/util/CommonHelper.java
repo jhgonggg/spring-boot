@@ -1,7 +1,10 @@
 package com.funtl.hello.spring.boot.util;
 
 import cn.hutool.core.util.RandomUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.funtl.hello.spring.boot.constant.SysConst;
+import com.funtl.hello.spring.boot.enums.PmUriEnum;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
@@ -101,4 +104,14 @@ public final class CommonHelper {
 
         System.out.println(newMan2);
     }
+
+    public static String assembleResourcesUri(String url, JSONObject json) {
+        if (StringUtils.equals(url, PmUriEnum.STARTWORKFLOW.getUri())) {
+            List<String> type = JSON.parseArray(JSON.toJSONString(json.get("type")), String.class);
+            return url.concat(SysConst.SLANTING).concat(type.get(SysConst.ZERO));
+        }
+        return url;
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package com.funtl.hello.spring.boot.intercept;
+package com.funtl.hello.spring.boot.config;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
