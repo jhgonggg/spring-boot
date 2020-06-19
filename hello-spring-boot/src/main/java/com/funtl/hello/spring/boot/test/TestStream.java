@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author qy
@@ -33,6 +34,37 @@ public class TestStream {
 
         System.out.println(map.keySet().containsAll(list));
 
+        /////////////////////////////////////////////////
+        map.forEach((k, v) -> {
+            System.out.println(k);
+            System.out.println(v);
+        });
+
+        ////////////////////////////////////////////////////
+        Stream.of("one", "two", "three", "four").forEach(x -> {
+            System.out.println(x + "A");
+        });
+        System.out.println("=============");
+
+        // peek 没有返回值，只适合对内部属性的操作 ，收集元素本身。  ---> [one, two, three, four] 可以看出还是收集的元素本身
+
+        List<String> collect2 = Stream.of("one", "two", "three", "four").peek(x -> x = x + 1).collect(Collectors.toList());
+
+        // map有返回值，收集返回后的元素  ---> [one1, two1, three1, four1]
+        List<String> collect = Stream.of("one", "two", "three", "four").map(x -> x + 1).collect(Collectors.toList());
+
+        System.out.println(collect);
+        ///////////////////////////////////////////////
+        System.out.println("#####################");
+
+        String[] words = {"Hello", "World"};
+
+        List<String> collect1 = Stream.of(words)
+                .map(word -> word.split(""))
+                .flatMap(Arrays::stream)
+                .collect(Collectors.toList());
+
+        System.out.println(collect1);
     }
 
 
