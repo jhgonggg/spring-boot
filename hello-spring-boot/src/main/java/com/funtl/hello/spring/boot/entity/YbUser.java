@@ -1,5 +1,9 @@
 package com.funtl.hello.spring.boot.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +13,9 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Table(name = "yb_user")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class YbUser {
     /**
      * 用户ID

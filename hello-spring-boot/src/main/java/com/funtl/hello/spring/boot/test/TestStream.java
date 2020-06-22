@@ -1,9 +1,8 @@
 package com.funtl.hello.spring.boot.test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.funtl.hello.spring.boot.entity.YbUser;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -65,6 +64,17 @@ public class TestStream {
                 .collect(Collectors.toList());
 
         System.out.println(collect1);
+
+
+        List<YbUser> lists = new ArrayList<>();
+        lists.add(YbUser.builder().id(11L).username("aaa").build());
+        lists.add(YbUser.builder().id(11L).username("bbb").build());
+        lists.add(YbUser.builder().id(12L).username("ccc").build());
+        List<YbUser> unique = lists.stream().collect(Collectors.collectingAndThen(
+                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(YbUser::getId).reversed())), ArrayList::new));
+        System.out.println(unique);
+
+
     }
 
 
