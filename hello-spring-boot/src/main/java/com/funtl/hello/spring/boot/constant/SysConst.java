@@ -1,6 +1,11 @@
 package com.funtl.hello.spring.boot.constant;
 
 
+import com.funtl.hello.spring.boot.enums.WorkFlowTypeEnum;
+
+import java.util.Arrays;
+import java.util.List;
+
 public final class SysConst {
 
     public static final String ALL = "*";
@@ -29,5 +34,21 @@ public final class SysConst {
 
     public static final int ONE = 1;
 
+
+    /**
+     * 工作类型常量
+     */
+    public static final List<Integer> WORK_TYPES = Arrays.asList(
+            WorkFlowTypeEnum.SHARE.getType(),
+            WorkFlowTypeEnum.NOTE.getType(),
+            WorkFlowTypeEnum.VISIT.getType(),
+            WorkFlowTypeEnum.APPROVAL.getType(),
+            WorkFlowTypeEnum.CLUE.getType(),
+            WorkFlowTypeEnum.CHECKIN.getType(),
+            WorkFlowTypeEnum.REPORT.getType(),
+            WorkFlowTypeEnum.MANUSCRIPTS.getType(),
+            WorkFlowTypeEnum.TASK.getType(),
+            WorkFlowTypeEnum.REVIEWER.getType(),
+            WorkFlowTypeEnum.PROOFREAD.getType());
 
 }
