@@ -7,6 +7,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.funtl.hello.spring.boot.configs.Config;
 import com.funtl.hello.spring.boot.constant.SysConst;
 import com.funtl.hello.spring.boot.dto.UserDTO;
+import com.funtl.hello.spring.boot.plusRedis.redis.Cache;
+import com.funtl.hello.spring.boot.plusRedis.redis.enums.CacheParamEnum;
+import com.funtl.hello.spring.boot.service.YbUserService;
 import com.funtl.hello.spring.boot.vo.UserVO;
 import com.funtl.hello.spring.boot.entity.YbUser;
 import com.funtl.hello.spring.boot.help.ContentFormatter;
@@ -40,6 +43,10 @@ public class HelloController {
     private LoginService loginService;
     @Autowired
     private Config config;
+    @Autowired
+    private YbUserService ybUserService;
+    @Autowired
+    Cache cache;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -114,13 +121,18 @@ public class HelloController {
     @GetMapping(value = "ip")
     public void getIp(HttpServletRequest httpServletRequest) {
         System.out.println("ip--->" + IpUtil.getRemoteAddr(httpServletRequest));
-        System.out.println(loginService.login(new YbUser()));
         System.out.println(IpUtil.getInternetIp());
+        cache.delete(CacheParamEnum.USER.getPrefix()+ 1L);
     }
 
     @GetMapping(value = "getSortedList")
     public Mono<Response> getSortedList() {
         // 根据姓名从从大到小排序
         return Mono.fromCallable(() -> ResponseBuilder.buildSuccess(ybUserMapper.selectAll().stream().sorted(Comparator.comparing(YbUser::getUsername).reversed()).collect(Collectors.toList())));
+    }
+
+    @GetMapping(value = "cacheTest")
+    public Mono<Response> cacheTest() {
+        return Mono.fromCallable(() -> ResponseBuilder.buildSuccess(ybUserService.getUser(1L)));
     }
 }
