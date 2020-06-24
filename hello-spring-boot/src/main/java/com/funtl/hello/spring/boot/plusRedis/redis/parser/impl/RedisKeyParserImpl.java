@@ -3,6 +3,7 @@ package com.funtl.hello.spring.boot.plusRedis.redis.parser.impl;
 import com.funtl.hello.spring.boot.constant.SysConst;
 import com.funtl.hello.spring.boot.plusRedis.redis.parser.RedisKeyParser;
 import com.google.common.base.Joiner;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -17,9 +18,10 @@ import java.util.Objects;
 
 
 /**
- * @author HUGUANG 2019年09月11日 上午9:53:42
+ * key 解析
  */
 @Component
+@Slf4j
 public class RedisKeyParserImpl implements RedisKeyParser {
 
 	/**

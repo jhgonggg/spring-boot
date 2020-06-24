@@ -95,6 +95,21 @@ public class IndexController {
         }
     }
 
+    @GetMapping("/upload/downloadVideo")
+    @ApiOperation(value = "工作流视频下载")
+    public ResponseEntity<byte[]> downloadVideo(@RequestParam @ApiParam(value = "下载文件名") String filename,
+                                                @RequestParam(value="mediaId") String mediaId){
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.set("Content-Disposition","attachment;fileName="+ URLEncoder.encode(filename, "utf-8"));
+            URL url = new URL("用 mediaId 获取的视频地址");
+            return new ResponseEntity<>(IOUtils.toByteArray(url), headers, HttpStatus.CREATED);
+        } catch (Exception e) {
+            throw new RuntimeException("下载视频失败");
+        }
+    }
+
     /**
      *  OkHttpClient 上传文件 、测试
      * @param file
