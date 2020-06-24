@@ -33,7 +33,9 @@ public class FlatMapTest {
         System.out.println("collect1-->" + collect1);
 
 //////////////////////////////*****/////////////  flatMap 扁平化流（记住 --> 是流） 针对 flatMap(内部运行完以后的流扁平化) /////////////
-// 集合流、数组流 -->(扁平化成) 单个流 Stream<String> ///////////////////
+// 集合流、数组流 -->(扁平化成) 单个流 Stream<String>
+
+// ** 可以理解成 一个 List 就是 一个 Stream<> 对象  （如: Stream<> 对象 调用 collect(Collectors.toList()) 方法转换成 List） **///////////////////
 
         List<String> uniqueCharacters =
                 words.stream()
