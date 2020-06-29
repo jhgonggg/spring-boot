@@ -820,6 +820,8 @@ public class RedisManager {
         }
     }
 
+    // Redis为我们提供了publish/subscribe(发布/订阅)功能。我们可以对某个channel(频道)进行subscribe(订阅)，当有人在这个channel上publish(发布)消息时，redis就会通知我们，这样我们可以收到别人发布的消息。
+
     public static void publish(String channel, String message) {
         Jedis jedis = getJedis();
         try {

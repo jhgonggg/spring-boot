@@ -4,8 +4,6 @@ import com.funtl.hello.spring.boot.response.ResponseBuilder;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.RequestBody;
-import okhttp3.*;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
@@ -27,7 +24,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import java.util.Random;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -115,36 +111,36 @@ public class IndexController {
      * @param file
      * @throws IOException
      */
-    @GetMapping(value = "upload")
-    @ResponseBody
-    public void testUpload(MultipartFile file) throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        String api = "/down";
-        String url = String.format("%s%s", "http://127.0.0.1:9090", api);
-        System.out.println(file.getName());  // file
-        System.out.println(file.getContentType()); // vedio/mp4 、 image/jpn
-        RequestBody requestBody = null;
-        try {
-            requestBody = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart(
-                            file.getName(),
-                            file.getOriginalFilename(),
-                            RequestBody.create(file.getBytes(),
-                                    okhttp3.MediaType.parse(org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)))
-                    .build();
-        } catch (IOException e) {
-            log.error("文件转换 byte 错误,e->{}", e.getMessage(), e);
-        }
-        Request request = new Request.Builder()
-                .url(url)
-                //默认为 GET 请求，可以不写
-                .post(Objects.requireNonNull(requestBody))
-                .build();
-        final Call call = client.newCall(request);
-        Response response = call.execute();
-        System.out.println(Objects.requireNonNull(response.body()).string());
-    }
+//    @GetMapping(value = "upload")
+//    @ResponseBody
+//    public void testUpload(MultipartFile file) throws IOException {
+//        OkHttpClient client = new OkHttpClient();
+//        String api = "/down";
+//        String url = String.format("%s%s", "http://127.0.0.1:9090", api);
+//        System.out.println(file.getName());  // file
+//        System.out.println(file.getContentType()); // vedio/mp4 、 image/jpn
+//        RequestBody requestBody = null;
+//        try {
+//            requestBody = new MultipartBody.Builder()
+//                    .setType(MultipartBody.FORM)
+//                    .addFormDataPart(
+//                            file.getName(),
+//                            file.getOriginalFilename(),
+//                            RequestBody.create(file.getBytes(),
+//                                    okhttp3.MediaType.parse(org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)))
+//                    .build();
+//        } catch (IOException e) {
+//            log.error("文件转换 byte 错误,e->{}", e.getMessage(), e);
+//        }
+//        Request request = new Request.Builder()
+//                .url(url)
+//                //默认为 GET 请求，可以不写
+//                .post(Objects.requireNonNull(requestBody))
+//                .build();
+//        final Call call = client.newCall(request);
+//        Response response = call.execute();
+//        System.out.println(Objects.requireNonNull(response.body()).string());
+//    }
 
     /**
      *  接收图片

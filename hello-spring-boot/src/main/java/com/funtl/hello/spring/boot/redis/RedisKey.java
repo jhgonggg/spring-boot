@@ -20,4 +20,6 @@ public class RedisKey {
      */
     public static final String CLEAR_KEY_SET_FLAG = "clear.key.set.flag";
 
+    public static final String REDIS_COLUMN_CACHE_CHANNEL = "redis.column.cache.channel";
+
 }
