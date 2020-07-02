@@ -620,6 +620,20 @@ public class RedisManager {
     }
 
     /**
+     * 从列右边出队一个元素
+     * @param key
+     * @return
+     */
+    public static String rpop(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.rpop(key);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
      * 获取队列长度
      *
      * @param key
@@ -723,7 +737,7 @@ public class RedisManager {
         }
     }
 
-    // 通过索引区间返回有序集合指定区间内的成员 ，0 表示第一个、-1 表示最后一个、-2 倒数第二个 ..
+    // 通过索引区间返回有序集合指定区间内的成员 【member】 ，0 表示第一个、-1 表示最后一个、-2 倒数第二个 ..
     public static Set<String> zrange(String key, long start, long end) {
         Jedis jedis = getJedis();
         try {
@@ -774,6 +788,15 @@ public class RedisManager {
         try {
 // 移出并获取列表的最后一个元素，如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止
             return jedis.brpop(timeout, key.getBytes());
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    public static List<String> blockRightPop(String key, int timeout){
+        Jedis jedis = getJedis();
+        try {
+            return jedis.brpop(timeout, key);
         } finally {
             returnResource(jedis);
         }
@@ -921,4 +944,80 @@ public class RedisManager {
             returnResource(jedis);
         }
     }
+
+    public static void incrBy(String key, long member) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.incrBy(key, member);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param keys
+     * @return
+     */
+    public static Long del(String... keys) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.del(keys);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 通过分数返回有序集合指定区间内的成员 从高到低
+     *
+     * @param key
+     * @param start
+     * @param end
+     * @return
+     */
+    public static Set<Tuple> zrevrangeWithScores(String key, long start, long end) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.zrevrangeWithScores(key, start, end);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 移除有序集合中给定的分数区间的所有成员
+     *
+     * @param key
+     * @param start
+     * @param end
+     * @return
+     */
+    public static Long zremrangeByScore(String key, double start, double end) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.zremrangeByScore(key, start, end);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * 通过分数返回有序集合指定区间内的成员
+     *
+     * @param key
+     * @param min
+     * @param max
+     * @return
+     */
+    public static Set<Tuple> zrangeByScore(final String key, final double min, final double max) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.zrangeByScoreWithScores(key, min, max);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
 }
