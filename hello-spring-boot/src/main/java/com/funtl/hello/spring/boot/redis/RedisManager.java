@@ -49,7 +49,9 @@ public class RedisManager {
         hset(key, String.valueOf(id), value);
     }
 
-    /** 给hash的一个值+1，用于点击数、分享数等 */
+    /**
+     * 给hash的一个值+1，用于点击数、分享数等
+     */
     public static Long hincr(String key, long id) {
         Jedis jedis = getJedis();
         try {
@@ -59,7 +61,9 @@ public class RedisManager {
         }
     }
 
-    /** 给hash的一个值+1，用于点击数、分享数等 */
+    /**
+     * 给hash的一个值+1，用于点击数、分享数等
+     */
     public static Long hincrByString(String key, String id) {
         Jedis jedis = getJedis();
         try {
@@ -69,7 +73,9 @@ public class RedisManager {
         }
     }
 
-    /** 给hash的一个值+value，用于点击数、分享数等 */
+    /**
+     * 给hash的一个值+value，用于点击数、分享数等
+     */
     public static Long hincr(String key, long id, Long value) {
         Jedis jedis = getJedis();
         try {
@@ -274,6 +280,7 @@ public class RedisManager {
 
     /**
      * 彻底清除前缀为key的缓存
+     *
      * @param key
      */
     public static void clearKeysTotally(String key) {
@@ -284,8 +291,8 @@ public class RedisManager {
         try {
             clearKeys(key);
             Set<String> keys = jedis.keys(key + "*");
-            if(keys.size()>0){
-                for(String keyElem : keys){
+            if (keys.size() > 0) {
+                for (String keyElem : keys) {
                     jedis.del(keyElem);
                 }
             }
@@ -296,6 +303,7 @@ public class RedisManager {
 
     /**
      * 彻底清除前缀为key的缓存 清理set
+     *
      * @param key
      */
     public static void clearKeysSet(String key) {
@@ -304,23 +312,23 @@ public class RedisManager {
         try {
             //每日key删除执行标志   如果不存在，则又到了删多余key的时候了。
             Long ttl = ttl(RedisKey.CLEAR_KEY_SET_FLAG);
-            if(ttl==-1||ttl==-2){
+            if (ttl == -1 || ttl == -2) {
                 clearFlag = true;
             }
             Set<String> keys = jedis.smembers(RedisKey.APP_CLEAR_KEYS_SET);
-            if(keys.size()>0){
-                for(String keyElem : keys){
-                    if(keyElem.startsWith(key)){
+            if (keys.size() > 0) {
+                for (String keyElem : keys) {
+                    if (keyElem.startsWith(key)) {
                         jedis.del(keyElem);
-                        jedis.srem(RedisKey.APP_CLEAR_KEYS_SET,keyElem);
-                    }else if(clearFlag){
-                        if(!exists(keyElem)){
-                            jedis.srem(RedisKey.APP_CLEAR_KEYS_SET,keyElem);
+                        jedis.srem(RedisKey.APP_CLEAR_KEYS_SET, keyElem);
+                    } else if (clearFlag) {
+                        if (!exists(keyElem)) {
+                            jedis.srem(RedisKey.APP_CLEAR_KEYS_SET, keyElem);
                         }
                     }
                 }
             }
-            if(clearFlag){ //1天清一次
+            if (clearFlag) { //1天清一次
                 setLonger(RedisKey.CLEAR_KEY_SET_FLAG, "1");
             }
         } finally {
@@ -330,6 +338,7 @@ public class RedisManager {
 
     /**
      * 清除以key为前缀的所有键,比较慢，建议异步使用
+     *
      * @param key
      */
     public static void clearKeysByScan(String key) {
@@ -338,17 +347,17 @@ public class RedisManager {
             String cursor = ScanParams.SCAN_POINTER_START;
             List<String> toBeDel = new ArrayList<>();
             ScanParams params = new ScanParams();
-            params.match(key+"*");
+            params.match(key + "*");
             params.count(5000);
-            while(true){
+            while (true) {
                 ScanResult<String> scan = jedis.scan(cursor, params);
                 toBeDel.addAll(scan.getResult());
-                cursor= scan.getStringCursor();
-                if("0".equals(cursor)){
+                cursor = scan.getStringCursor();
+                if ("0".equals(cursor)) {
                     break;
                 }
             }
-            if(toBeDel.size()>0){
+            if (toBeDel.size() > 0) {
                 jedis.del(toBeDel.toArray(new String[0]));
             }
         } finally {
@@ -517,7 +526,7 @@ public class RedisManager {
         try {
             jedis.rpush(key, strings);
             jedis.expire(key, expireTime);
-        }finally {
+        } finally {
             returnResource(jedis);
         }
     }
@@ -566,6 +575,7 @@ public class RedisManager {
             returnResource(jedis);
         }
     }
+
     /**
      * 设置Key的值，指定过期时间
      */
@@ -611,6 +621,7 @@ public class RedisManager {
 
     /**
      * 获取队列长度
+     *
      * @param key
      * @return
      */
@@ -626,6 +637,7 @@ public class RedisManager {
 
     /**
      * 删除key的过期时间
+     *
      * @param key
      * @return
      */
@@ -640,6 +652,7 @@ public class RedisManager {
 
     /**
      * 获取所有包含某前缀的key的集合
+     *
      * @param prefixKey 前缀
      * @return
      */
@@ -658,6 +671,7 @@ public class RedisManager {
 
     /**
      * 返回set成员长度
+     *
      * @param key
      * @return
      */
@@ -679,15 +693,17 @@ public class RedisManager {
         }
     }
 
+    // ZADD KEY_NAME SCORE1 VALUE1.. SCORE2 VALUE2 ..
     public static void zadd(String key, Map<String, Double> scoreMembers) {
         Jedis jedis = getJedis();
         try {
-            jedis.zadd(key,scoreMembers);
+            jedis.zadd(key, scoreMembers);
         } finally {
             returnResource(jedis);
         }
     }
 
+    // 移除有序集合中的一个或多个成员
     public static void zrem(String key, String member) {
         Jedis jedis = getJedis();
         try {
@@ -697,6 +713,7 @@ public class RedisManager {
         }
     }
 
+    // 计算集合中元素的数量。
     public static Long zcard(String key) {
         Jedis jedis = getJedis();
         try {
@@ -706,6 +723,7 @@ public class RedisManager {
         }
     }
 
+    // 通过索引区间返回有序集合指定区间内的成员 ，0 表示第一个、-1 表示最后一个、-2 倒数第二个 ..
     public static Set<String> zrange(String key, long start, long end) {
         Jedis jedis = getJedis();
         try {
@@ -715,6 +733,7 @@ public class RedisManager {
         }
     }
 
+    // 返回有序集中指定区间内的成员，通过索引，分数从高到低 ( Sorted Set 是通过分数【即第二个字段score的值】来进行排序的 )
     public static Set<String> zrevrange(String key, long start, long end) {
         Jedis jedis = getJedis();
         try {
@@ -724,15 +743,28 @@ public class RedisManager {
         }
     }
 
+    // 返回有序集合中指定成员的索引
+    public static Long zrank(String key, String member) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.zrank(key, member);
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
     public static int getMinute1() {
         return minute1;
     }
+
     public static int getHour1() {
         return hour1;
     }
+
     public static int getDay1() {
         return day1;
     }
+
     public static int getWeek1() {
         return week1;
     }
@@ -740,12 +772,13 @@ public class RedisManager {
     public static List<byte[]> getBlockList(String key, int timeout) throws Exception {
         Jedis jedis = getJedis();
         try {
-
+// 移出并获取列表的最后一个元素，如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止
             return jedis.brpop(timeout, key.getBytes());
         } finally {
             returnResource(jedis);
         }
     }
+
     public static Long setList(String key, String value) {
         Jedis jedis = getJedis();
         try {
@@ -783,11 +816,31 @@ public class RedisManager {
         }
     }
 
+// 命令用于查找所有符合给定模式 pattern 的 key 。。
+
+    /**
+     * redis 127.0.0.1:6379> SET runoob1 redis
+     * OK
+     * redis 127.0.0.1:6379> SET runoob2 mysql
+     * OK
+     * redis 127.0.0.1:6379> SET runoob3 mongodb
+     * OK
+     * redis 127.0.0.1:6379> KEYS runoob*
+     * 1) "runoob3"
+     * 2) "runoob1"
+     * 3) "runoob2"
+     * <p>
+     * 获取 redis 中所有的 key
+     * redis 127.0.0.1:6379> KEYS *
+     * 1) "runoob3"
+     * 2) "runoob1"
+     * 3) "runoob2"
+     */
     public static Set<String> keys(String pattern) {
         Jedis jedis = getJedis();
         try {
             return jedis.keys(pattern);
-        }finally {
+        } finally {
             returnResource(jedis);
         }
     }
@@ -796,7 +849,7 @@ public class RedisManager {
         Jedis jedis = getJedis();
         try {
             return jedis.srandmember(key);
-        }finally {
+        } finally {
             returnResource(jedis);
         }
     }
@@ -830,6 +883,7 @@ public class RedisManager {
             returnResource(jedis);
         }
     }
+
     public static Long ttl(String key) {
         Jedis jedis = getJedis();
         try {

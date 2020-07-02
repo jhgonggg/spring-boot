@@ -106,4 +106,13 @@ public class OkHttpBuilder {
         return newBuilder;
     }
 
+    public static void main(String[] args) {
+        // 创建自己需要的 OkHttpClient 对象
+        OkHttpClient okHttpClient = OkHttpBuilder.build(60, 60, 60).build();
+
+//        String response = OkHttpUtils.post(okHttpClient, url, map);
+
+//        String response = OkHttpUtils.post(okHttpClient, url, JSON.toJSONString(Stream.of(videoDTO).collect(Collectors.toList())), header, OkHttpUtils.HttpMediaType.JSON);
+    }
+
 }

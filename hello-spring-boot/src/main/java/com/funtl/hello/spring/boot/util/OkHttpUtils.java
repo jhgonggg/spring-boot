@@ -151,7 +151,7 @@ public class OkHttpUtils {
     }
 
     /**
-     * 设置header,MediaType,带有请求体的post请求
+     * 设置header,MediaType,带有请求体的post请求  使用默认的 defaultClient
      *
      * @param url            请求地址
      * @param requestBodyRaw 请求体原始数据
@@ -181,6 +181,7 @@ public class OkHttpUtils {
 
         return createRequest(okHttpClient, request);
     }
+
     /**
      * 提交表单
      */
@@ -188,10 +189,10 @@ public class OkHttpUtils {
         FormBody.Builder builder = new FormBody.Builder();
         if (bodyMap != null && bodyMap.size() > 0) {
             for (Map.Entry<String, String> bodyEntry : bodyMap.entrySet()) {
-            	builder.add(bodyEntry.getKey(), bodyEntry.getValue());
+                builder.add(bodyEntry.getKey(), bodyEntry.getValue());
             }
-		}
-		return createRequest(new Request.Builder().url(url).post(builder.build()).build());
+        }
+        return createRequest(new Request.Builder().url(url).post(builder.build()).build());
     }
 
 
@@ -221,6 +222,7 @@ public class OkHttpUtils {
 
     /**
      * 是否请求失败
+     *
      * @param response
      * @return true: 请求失败 false: 请求成功
      */
@@ -236,7 +238,7 @@ public class OkHttpUtils {
     }
 
     //异步post
-    public static  void asynPost(final String url,Map<String,Object> params,Map<String,String> headers){
+    public static void asynPost(final String url, Map<String, Object> params, Map<String, String> headers) {
         RequestBody paramBody = null;
         if (params != null && !params.isEmpty()) {
             FormBody.Builder builder = new FormBody.Builder();
@@ -257,11 +259,12 @@ public class OkHttpUtils {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-               log.error("请求{}出错",url);
+                log.error("请求{}出错", url);
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                log.info("请求{}成功",url);
+                log.info("请求{}成功", url);
             }
         });
     }

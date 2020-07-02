@@ -1,10 +1,15 @@
 package com.funtl.hello.spring.boot.util;
 
+import com.alibaba.fastjson.JSONObject;
+import com.funtl.hello.spring.boot.entity.YbUser;
 import com.google.common.collect.Maps;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.CollectionUtils;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
@@ -13,9 +18,10 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 
-public class BeanCopyUtils extends org.springframework.beans.BeanUtils {
+public class BeanCopyUtils extends BeanUtils {
 
 
     public static <T> List<T> copyList(List<?> sourceList, Class<T> clazz) {
@@ -91,4 +97,30 @@ public class BeanCopyUtils extends org.springframework.beans.BeanUtils {
         }
         return result;
     }
+
+    public static <F, T> List<T> transform(List<F> sourceList, Function<? super F, @Nullable ? extends T> function) {
+        List<T> retList = new ArrayList<T>();
+        if (!CollectionUtils.isEmpty(sourceList)) {
+            for (F f : sourceList) {
+                retList.add(function.apply(f));
+            }
+        }
+        return retList;
+    }
+
+    public static void main(String[] args) {
+        YbUser user1 = new YbUser();
+        YbUser user2 = new YbUser();
+        user1.setId(1L);
+        user2.setId(2L);
+        YbUser[] user = new YbUser[]{user1, user2};
+        List<YbUser> users =  CollectionUtils.arrayToList(user);
+        List<JSONObject> retList = transform(users, ybUser -> {
+            JSONObject json = new JSONObject();
+            json.put("id",ybUser.getId());
+            return json;
+        });
+        System.out.println(retList);
+    }
+
 }
