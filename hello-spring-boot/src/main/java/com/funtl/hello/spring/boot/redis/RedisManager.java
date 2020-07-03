@@ -35,7 +35,7 @@ public class RedisManager {
         }
     }
 
-
+    // 将哈希表 key 中的字段 field 的值设为 value
     public static void hset(String key, String field, String value) {
         Jedis jedis = getJedis();
         try {
@@ -86,7 +86,7 @@ public class RedisManager {
     }
 
     /**
-     * 从Redis中取出一个值
+     * 获取存储在哈希表中指定字段【field】的值。
      */
     public static String hget(String key, String field) {
         Jedis jedis = getJedis();
@@ -108,6 +108,7 @@ public class RedisManager {
         return hget(key, String.valueOf(id));
     }
 
+   // 获取所有哈希表中的字段
     public static Set<String> hkeys(String key) {
         Jedis jedis = getJedis();
         try {
@@ -118,7 +119,7 @@ public class RedisManager {
     }
 
     /**
-     * 清空一个值
+     * 删除一个或多个哈希表字段  参数可以多个 field 【见下面方法】
      */
     public static void hclear(String key, String field) {
         Jedis jedis = getJedis();
@@ -147,6 +148,7 @@ public class RedisManager {
         }
     }
 
+    // 获取哈希表中字段的数量
     public static Long hlen(String key) {
         Jedis jedis = getJedis();
         try {
@@ -231,8 +233,7 @@ public class RedisManager {
         Jedis jedis = getJedis();
         try {
             if (jedis.exists(key)) {
-                String s = jedis.get(key);
-                return s;
+                return jedis.get(key);
             } else {
                 return null;
             }
@@ -257,6 +258,10 @@ public class RedisManager {
 
     /**
      * 清空列表keys，一般是多页  以10为一页
+     * (redis 存分页列表时 ) 比如 每页10条 ： key = user.list.
+     * 第一页 RedisManager.set(key + 10 , list)
+     * 第二页 RedisManager.set(key + 20 , list)
+     * 清除key 时，直接调用 clearKeys(key)
      */
     public static void clearKeys(String key) {
         if (!key.endsWith(".")) {
@@ -279,7 +284,7 @@ public class RedisManager {
     }
 
     /**
-     * 彻底清除前缀为key的缓存
+     * 彻底清除前缀为key的缓存； 通配符删除 前缀相同的key  【String 类型的】
      *
      * @param key
      */
@@ -315,6 +320,7 @@ public class RedisManager {
             if (ttl == -1 || ttl == -2) {
                 clearFlag = true;
             }
+            //  返回set集合中的所有成员
             Set<String> keys = jedis.smembers(RedisKey.APP_CLEAR_KEYS_SET);
             if (keys.size() > 0) {
                 for (String keyElem : keys) {
@@ -338,7 +344,7 @@ public class RedisManager {
 
     /**
      * 清除以key为前缀的所有键,比较慢，建议异步使用
-     *
+     *  taskExecutor.execute(()->RedisManager.clearKeysByScan(key));
      * @param key
      */
     public static void clearKeysByScan(String key) {
@@ -453,6 +459,7 @@ public class RedisManager {
         }
     }
 
+    // 查看哈希表的指定字段是否存在
     public static Boolean hexists(String key, String field) {
         Jedis jedis = getJedis();
         try {
@@ -466,6 +473,7 @@ public class RedisManager {
         return hexists(key, String.valueOf(field));
     }
 
+    //以列表形式返回哈希表的字段及字段值。 若 key 不存在，返回空列表
     public static Map<String, String> hgetAll(String key) {
         Jedis jedis = getJedis();
         try {
@@ -475,6 +483,7 @@ public class RedisManager {
         }
     }
 
+   // 同时将多个 field-value (字段-值)对设置到哈希表中
     public static String hmset(String key, Map<String, String> value) {
         Jedis jedis = getJedis();
         try {
@@ -503,6 +512,9 @@ public class RedisManager {
         }
     }
 
+    //  返回列表中指定区间内的元素，区间以偏移量 START 和 END 指定。
+    //  其中 0 表示列表的第一个元素， 1 表示列表的第二个元素，以此类推。
+    // 以 -1 表示列表的最后一个元素， -2 表示列表的倒数第二个元素，以此类推
     public static List<String> lrange(String key, long start, long end) {
         Jedis jedis = getJedis();
         try {
@@ -868,6 +880,7 @@ public class RedisManager {
         }
     }
 
+    // 返回 set 集合中的一个随机元素。
     public static String srandmember(String key) {
         Jedis jedis = getJedis();
         try {
@@ -877,6 +890,7 @@ public class RedisManager {
         }
     }
 
+    // 移除集合中的一个或多个成员元素
     public static long srem(String key, String member) {
         Jedis jedis = getJedis();
         try {
@@ -907,6 +921,8 @@ public class RedisManager {
         }
     }
 
+    // 返回 key 的过期时间 、秒为单位
+    // 当 key 不存在时，返回 -2 。 当 key 存在但没有设置剩余生存时间时，返回 -1 。
     public static Long ttl(String key) {
         Jedis jedis = getJedis();
         try {
