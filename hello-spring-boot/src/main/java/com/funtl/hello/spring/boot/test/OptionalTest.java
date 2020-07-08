@@ -87,6 +87,11 @@ public class OptionalTest {
 
         System.out.println(map);
         System.out.println(LIST2);
+
+        List<YbUser> list= null;
+        List<YbUser> userList = Optional.ofNullable(list).orElseGet(ArrayList::new).stream().filter(u -> u.getUsername().length() > 6).collect(Collectors.toList());
+        System.out.println(userList);
+
     }
 
 

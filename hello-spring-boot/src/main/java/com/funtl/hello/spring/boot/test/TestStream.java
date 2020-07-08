@@ -67,12 +67,33 @@ public class TestStream {
 
 
         List<YbUser> lists = new ArrayList<>();
-        lists.add(YbUser.builder().id(11L).username("aaa").build());
         lists.add(YbUser.builder().id(11L).username("bbb").build());
-        lists.add(YbUser.builder().id(12L).username("ccc").build());
+        lists.add(YbUser.builder().id(10L).username("ccc").build());
+
+        List<YbUser> list2 = new ArrayList<>();
+        lists.add(YbUser.builder().id(11L).username("aaa").build());
+        lists.add(YbUser.builder().id(13L).username("bbb").build());
+
+        // 根据id去重并排序
+        // Collectors.toCollection 把收集的元素放到创建的指定集合，如 下面放到 treeSet 并且id排序的集合
+        // Collectors.collectingAndThen 对结果做相应的转换 ，如 下面 将收集的 treeSet 转换成 ArrayList
         List<YbUser> unique = lists.stream().collect(Collectors.collectingAndThen(
                 Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(YbUser::getId).reversed())), ArrayList::new));
         System.out.println(unique);
+
+
+        ArrayList<Long> collect3 = Stream.of(list2, lists).flatMap(Collection::stream).map(YbUser::getId).collect(Collectors.collectingAndThen(
+                Collectors.toCollection(TreeSet::new), ArrayList::new));
+
+        System.out.println(collect3);
+
+
+         // 分类成一个key为true和false的Map
+        List<String> list5 = Arrays.asList("java", "python", "C++","php","java");
+        Map<Boolean, List<String>> result = list5.stream().collect(Collectors.partitioningBy(s -> s.length() > 3));
+        System.out.println(result);
+
+        TreeSet<YbUser> collect4 = lists.stream().collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(YbUser::getId).reversed())));
 
 
     }
