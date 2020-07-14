@@ -2,6 +2,14 @@ package com.funtl.hello.spring.boot.redis;
 
 
 public class RedisKey {
+
+    /**
+     * 稿件点击统计限流key
+     */
+    public static final String ARTICLE_CLICK_SENTINEL_OVER_PREFIX = "article.click.sentinel.over.prefix.";
+    public static final String ARTICLE_CLICK_SENTINEL_FREQUENT_PREFIX = "article.click.sentinel.frequent.prefix.";
+
+
     /**
      * pc用户登录的key
      */

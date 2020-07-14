@@ -1,8 +1,15 @@
 package com.funtl.hello.spring.boot.test;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -50,6 +57,21 @@ public class Test {
         String format = String.format("%.0f", Double.parseDouble("123.123"));
 
         System.out.println(Long.parseLong(format));
+
+        long tomorrowTimeStamp = LocalDateTime.of(LocalDate.now().plusDays(NumberUtils.LONG_ONE), LocalTime.MIN)
+                .atZone(ZoneId.systemDefault())
+                .toInstant()
+                .toEpochMilli();
+        System.out.println(DateFormatUtils.format(tomorrowTimeStamp, "yyyy-MM-dd HH:mm:ss"));
+
+        int expire = (int) (tomorrowTimeStamp - System.currentTimeMillis()) / 1000;
+
+
+        List<byte[]> list = Lists.newArrayList();
+        byte [] a= new byte[]{98,97};
+        list.add(a);
+        String s = new String(list.get(0));
+        System.out.println(s);
 
     }
 

@@ -18,7 +18,6 @@ public class RedisConfiguration {
 
     @Bean
     public JedisPoolConfig jedisPoolConfig() {
-        System.out.println(redisConfig);
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxTotal(redisConfig.getMaxTotal());
         jedisPoolConfig.setMaxIdle(redisConfig.getMaxIdle());

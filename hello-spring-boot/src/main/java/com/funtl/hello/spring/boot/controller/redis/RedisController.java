@@ -1,21 +1,31 @@
 package com.funtl.hello.spring.boot.controller.redis;
 
 import cn.hutool.core.util.StrUtil;
+import com.funtl.hello.spring.boot.configs.LimitConfig;
 import com.funtl.hello.spring.boot.entity.YbAgree;
 import com.funtl.hello.spring.boot.enums.AgreeEnum;
 import com.funtl.hello.spring.boot.mapper.YbAgreeMapper;
+import com.funtl.hello.spring.boot.redis.RedisKey;
 import com.funtl.hello.spring.boot.redis.RedisManager;
 import com.funtl.hello.spring.boot.response.Response;
 import com.funtl.hello.spring.boot.response.ResponseBuilder;
 import com.google.common.collect.ImmutableMap;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 /**
  * 现在我们有一个APP，产品新提出一个叫“程序员树洞”的功能，具体功能就不说了，其中这个功能有一点需要做的是在使用该功能时，如果是首次进入会展示一个协议页面，用户需要勾选后点确定才能进入功能，此后再进该功能，不再显示协议页直接进入该功能。
  * <p>
@@ -29,10 +39,13 @@ import reactor.core.publisher.Mono;
  * @description 解决 redis 缓存穿透
  */
 @RestController(value = "redis")
+@Slf4j
 public class RedisController {
 
     @Autowired
     private YbAgreeMapper ybAgreeMapper;
+    @Autowired
+    private LimitConfig limitConfig;
 
     private final static String AGREE_KEY = "has_agree_key";
 
@@ -100,5 +113,61 @@ public class RedisController {
                 return insert > 0 ? ResponseBuilder.buildSuccess() : ResponseBuilder.buildFail();
             }
         });
+    }
+
+    /**
+     * 是否超过
+     *
+     * @param articleId
+     * @param ip 用户 ip
+     * @return
+     */
+    private boolean over(Long articleId, String ip) {
+        String key = RedisKey.ARTICLE_CLICK_SENTINEL_OVER_PREFIX + articleId;
+
+        if (BooleanUtils.isFalse(RedisManager.exists(key))) {
+            RedisManager.hincrByString(key, ip);
+
+            // 计算当前到0点间隔时间
+            long tomorrowTimeStamp = LocalDateTime.of(LocalDate.now().plusDays(NumberUtils.LONG_ONE), LocalTime.MIN)
+                    .atZone(ZoneId.systemDefault())
+                    .toInstant()
+                    .toEpochMilli();
+            int expire = (int) (tomorrowTimeStamp - System.currentTimeMillis()) / 1000;
+            RedisManager.expire(key, expire);
+        } else {
+            Long nowCount = RedisManager.hincrByString(key, ip);
+            if (nowCount > limitConfig.getArticleClickSentinelOverCount()) {
+                log.warn("Sentinel:可疑稿件点击,稿件id={},ip={},当日点击数={}", articleId, ip, nowCount);
+                return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
+    }
+
+    /**
+     * 频繁请求
+     *
+     * @param articleId
+     * @param ip 用户 ip
+     * @return
+     */
+    private boolean frequent(Long articleId, String ip) {
+        String key = RedisKey.ARTICLE_CLICK_SENTINEL_FREQUENT_PREFIX +
+                articleId +
+                "." +
+                ip;
+
+        if (RedisManager.exists(key)) {
+            Long nowCount = RedisManager.incr(key);
+            if (nowCount > limitConfig.getArticleClickSentinelFrequentCount()) {
+                log.warn("可疑稿件点击,稿件id={},ip={},1分钟内点击数={}", articleId, ip, nowCount);
+                return Boolean.TRUE;
+            }
+        } else {
+            RedisManager.incr(key);
+            RedisManager.expire(key, limitConfig.getArticleClickSentinelFrequentSecond());
+        }
+        return Boolean.FALSE;
     }
 }

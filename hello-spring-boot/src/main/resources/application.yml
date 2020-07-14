@@ -72,3 +72,10 @@ cyh:
 login:
   valid:
     time: 86400
+limit:
+  #自然天同一ip最大统计数
+  articleClickSentinelOverCount: 100
+  #同一ip频繁请求统计时间/秒
+  articleClickSentinelFrequentSecond: 60
+  #同一ip频繁请求统计时间内最大统计数
+  articleClickSentinelFrequentCount: 30
