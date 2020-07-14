@@ -1,6 +1,8 @@
 package com.funtl.hello.spring.boot.controller;
 
+import com.funtl.hello.spring.boot.entity.YbUser;
 import com.funtl.hello.spring.boot.response.ResponseBuilder;
+import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +24,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Random;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -77,7 +81,7 @@ public class IndexController {
                                 throw new RuntimeException("内含不支持下载的图片");
                             }
                             URL url = new URL(file);
-                            zos.putNextEntry(new ZipEntry(file.substring(file.lastIndexOf("/"))));
+                            zos.putNextEntry(new ZipEntry(file.substring(file.lastIndexOf("/"))));  // 每个文件的文件名
                             try (InputStream fis = url.openConnection().getInputStream()) {
                                 IOUtils.copy(fis, zos);
                             }
@@ -155,6 +159,39 @@ public class IndexController {
             System.out.println(name);
             return ResponseBuilder.buildSuccess();
         });
+    }
+
+    @PostMapping("downloadEvidence")
+    @ApiOperation(value = "下载证据包")
+    public ResponseEntity<byte[]> downloadEvidence(List<String> ids) throws Exception {
+        String fileName = "xxx.zip";
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        httpHeaders.setContentDispositionFormData("attachment", URLEncoder.encode(fileName, StandardCharsets.UTF_8.name()));
+        byte[] zipBytes = downloadEvidZip(ids);
+        return new ResponseEntity<>(zipBytes, httpHeaders, HttpStatus.CREATED);
+    }
+
+    public byte[] downloadEvidZip(List<String> ids) {
+        List<YbUser> evidences = Lists.newArrayList();
+        try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
+            evidences.forEach(evidence -> {
+                byte[] bytes = new byte[]{1, 2, 3};
+                String fileName = "每个文件名";
+                ZipEntry entry = new ZipEntry(fileName);
+                try (ZipOutputStream zos = new ZipOutputStream(stream)) {   // 把 ZipOutputStream 写进 ByteArrayOutputStream
+                    zos.putNextEntry(entry);
+                    zos.write(bytes);       // 把文件流写进 ZipOutputStream
+                    zos.closeEntry();
+                } catch (IOException e) {
+                    log.error("下载证据包出错", e);
+                }
+            });
+            return stream.toByteArray();
+        } catch (IOException e) {
+            log.error("下载证据包出错", e);
+        }
+        return new byte[0];
     }
 
 }
