@@ -25,6 +25,14 @@ spring:
     password: 12345
     port: 6379
     timeout: 10s
+    max-total: 20
+    max-idle: 8
+    min-idle: 2
+    # 测试返回 Map 对象用 @see com.funtl.hello.spring.boot.configs.RedisConfig.test
+    test:
+      test1: 1
+      test2: 2
+      test3: 3
 
   # 配置静态资源路径(默认配置是 static目录下,改成 /static 便于查看 js 与 css)
   mvc:

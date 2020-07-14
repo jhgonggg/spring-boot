@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * Description:e5缓存刷新:站点相关配置
  *
  */
+@Component
 public class E5SiteConfigJob {
 
     private static final Logger log = LoggerFactory.getLogger(E5SiteConfigJob.class);
@@ -38,8 +40,9 @@ public class E5SiteConfigJob {
         Thread e5SiteConfigThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (Boolean.TRUE) {
+                while (true) {
                     try {
+                        log.info("进入 E5SiteConfigJob.........");
                         String e5CacheTask = E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.poll();
                         if (StringUtils.isNotBlank(e5CacheTask)) {
                             long l = System.currentTimeMillis();

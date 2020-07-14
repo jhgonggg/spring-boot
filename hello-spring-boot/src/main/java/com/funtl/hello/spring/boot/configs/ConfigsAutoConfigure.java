@@ -5,6 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@EnableConfigurationProperties(Config.class)
+@EnableConfigurationProperties({Config.class, RedisConfig.class})
 public class ConfigsAutoConfigure {
 }

@@ -25,7 +25,7 @@ public class RedisManager {
         return jedisPool;
     }
 
-    public static Jedis getJedis() {
+    public static synchronized Jedis getJedis() {
         return getJedisPool().getResource();
     }
 
