@@ -19,7 +19,9 @@ public class ThreadPoolConfig implements AsyncConfigurer {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(10);
         taskExecutor.setMaxPoolSize(20);
+        //线程池所使用的缓冲队列
         taskExecutor.setQueueCapacity(200);
+        //线程池维护线程所允许的空闲时间
         taskExecutor.setKeepAliveSeconds(2000);
         taskExecutor.setThreadNamePrefix("xxx-thread-");
         return taskExecutor;

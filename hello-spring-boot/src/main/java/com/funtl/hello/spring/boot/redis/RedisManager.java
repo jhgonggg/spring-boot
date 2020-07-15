@@ -798,8 +798,11 @@ public class RedisManager {
     public static List<byte[]> getBlockList(String key, int timeout) throws Exception {
         Jedis jedis = getJedis();
         try {
-// 移出并获取列表的最后一个元素，如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止
-//假如在指定时间内没有任何元素被弹出，则返回一个 nil 和等待时长。 反之，返回一个含有两个元素的列表，第一个元素是被弹出元素所属的 key ，第二个元素是被弹出元素的值。 JSON.parseObject(new String(list.get(1), StandardCharsets.UTF_8), EventInfo.class);
+        // 移出并获取列表的最后一个元素，如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止
+        //假如在指定时间内没有任何元素被弹出，则返回一个 nil 和等待时长。
+        // 反之，返回一个含有两个元素的列表，第一个元素是被弹出元素所属的 key ，第二个元素是被弹出元素的值。
+        // JSON.parseObject(new String(list.get(1), StandardCharsets.UTF_8), EventInfo.class);
+        // timeout  超时等待时间
             return jedis.brpop(timeout, key.getBytes());
         } finally {
             returnResource(jedis);
