@@ -33,7 +33,7 @@ public class TestThread {
     /**
      * 初始化
      */
-    @PostConstruct
+    @PostConstruct     // 容器初始化bean 之前执行
     public void init() {
         scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(
                 1,

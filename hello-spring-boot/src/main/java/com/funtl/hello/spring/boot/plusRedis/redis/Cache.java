@@ -2,6 +2,7 @@ package com.funtl.hello.spring.boot.plusRedis.redis;
 
 import org.springframework.data.redis.core.ZSetOperations;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -42,6 +43,17 @@ public interface Cache {
 	 */
 	Object get(String key);
 
+	/**
+	 * 插入队列
+	 */
+	Long leftPush(String key, String value);
+
+	/**
+	 * 弹出元素
+	 */
+	String blockRightPop(String key, long timeout, TimeUnit unit);
+
+	List<String> lrange(String key, long start, long end);
 
 	/**
 	 * 对键设置过期时间

@@ -9,6 +9,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -47,6 +49,28 @@ public class RedisImpl<K, V> implements Cache {
 	@Override
 	public Object get(String key) {
 		return redisTemplate.opsForValue().get(key);
+	}
+
+	@Override
+	public Long leftPush(String key, String value) {
+		Long ret = redisTemplate.opsForList().leftPush(key, value);
+		log.info("添加到队列, key-->{}, value-->{}", key, value);
+		return ret;
+	}
+
+	@Override
+	public String blockRightPop(String key, long timeout, TimeUnit unit) {
+		try {
+			Object ret = redisTemplate.opsForList().rightPop(key, timeout, unit);
+			return Objects.nonNull(ret) ? ret.toString() : null;
+		} catch (Exception e) {
+		}
+		return null;
+	}
+
+	@Override
+	public List<String> lrange(String key, long start, long end) {
+		return redisTemplate.opsForList().range(key, start, end);
 	}
 
 	@Override

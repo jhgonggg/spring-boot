@@ -9,6 +9,10 @@ public class RedisKey {
     public static final String ARTICLE_CLICK_SENTINEL_OVER_PREFIX = "article.click.sentinel.over.prefix.";
     public static final String ARTICLE_CLICK_SENTINEL_FREQUENT_PREFIX = "article.click.sentinel.frequent.prefix.";
 
+    /**
+     * 编审抄送用户工作队列
+     */
+    public static final String REVIEWER_PERSON_LIST = "reviewer.person.list";
 
     /**
      * pc用户登录的key

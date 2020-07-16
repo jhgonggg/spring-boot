@@ -1,10 +1,9 @@
 package com.funtl.hello.spring.boot.test;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,9 +15,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  *
  */
 @Component
+@Slf4j
 public class E5SiteConfigJob {
-
-    private static final Logger log = LoggerFactory.getLogger(E5SiteConfigJob.class);
 
     /**
      * e5 cache class name list
@@ -37,33 +35,31 @@ public class E5SiteConfigJob {
         CACHE_CLASS_NAME_LIST.add("com.founder.xy.jpublish.BaseDataCache");
         CACHE_CLASS_NAME_LIST.add("com.founder.e5.sys.SysCache");
 
-        Thread e5SiteConfigThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        log.info("进入 E5SiteConfigJob.........");
-                        String e5CacheTask = E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.poll();
-                        if (StringUtils.isNotBlank(e5CacheTask)) {
-                            long l = System.currentTimeMillis();
-                            refreshCache();
-                            long l1 = System.currentTimeMillis();
-                            log.info("e5刷新缓存线程:刷新[站点相关配置]完成,耗时={}", (l1 - l));
-                            log.info("e5刷新缓存线程:剩余={}", E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.size());
+        Thread e5SiteConfigThread = new Thread(() -> {
+            while (true) {
+                try {
+                    log.info("进入 E5SiteConfigJob.........");
+                    String e5CacheTask = E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.poll();
+                    if (StringUtils.isNotBlank(e5CacheTask)) {
+                        long l = System.currentTimeMillis();
+                        refreshCache();
+                        long l1 = System.currentTimeMillis();
+                        log.info("e5刷新缓存线程:刷新[站点相关配置]完成,耗时={}", (l1 - l));
+                        log.info("e5刷新缓存线程:剩余={}", E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.size());
 
-                            // 不为空时清空,再添加一个
-                            if (CollectionUtils.isNotEmpty(E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE)) {
-                                E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.removeAll(E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE);
-                                addTask(NumberUtils.INTEGER_ONE.toString());
-                            }
-                        } else {
-                            synchronized (E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE) {
-                                E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.wait();
-                            }
+                        // 不为空时清空,再添加一个
+                        if (CollectionUtils.isNotEmpty(E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE)) {
+                            E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.removeAll(E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE);
+                            addTask(NumberUtils.INTEGER_ONE.toString());
                         }
-                    } catch (Exception e) {
-                        log.error("e5刷新线程异常", e);
+                    } else {
+                        synchronized (E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE) {
+                            log.info("E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE 进入等待状态");
+                            E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.wait();
+                        }
                     }
+                } catch (Exception e) {
+                    log.error("e5刷新线程异常", e);
                 }
             }
         });
@@ -85,6 +81,7 @@ public class E5SiteConfigJob {
      */
     public static void e5CacheQueueNotifyAll() {
         synchronized (E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE) {
+            log.info("唤醒 E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE");
             E5_CACHE_REFRESH_TASK_BLOCKING_QUEUE.notifyAll();
         }
     }

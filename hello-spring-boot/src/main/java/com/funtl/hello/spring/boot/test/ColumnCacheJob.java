@@ -32,36 +32,33 @@ public class ColumnCacheJob {
     /**
      * 初始化
      */
-    public void init() {
+    public static void init() {
         log.info("栏目缓存线程:启动");
-        Thread columnCacheThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (Boolean.TRUE) {
-                    try {
-                        // poll():当没有获得数据时返回为null，如果有数据时则移除移除表头数据，并将表头数据进行返回
-                        ColumnCacheTask columnCacheTask = COLUMN_CACHE_TASK_BLOCKING_QUEUE.poll();
-                        if (columnCacheTask != null) {
+        Thread columnCacheThread = new Thread(() -> {
+            while (Boolean.TRUE) {
+                try {
+                    // poll():当没有获得数据时返回为null，如果有数据时则移除移除表头数据，并将表头数据进行返回
+                    ColumnCacheTask columnCacheTask = COLUMN_CACHE_TASK_BLOCKING_QUEUE.poll();
+                    if (columnCacheTask != null) {
 //                            if (BASECACHE == null) {
 //                                BASECACHE = (BaseCache) CacheManager.find(ColumnCache.class);
 //                            }
 
-                            long l = System.currentTimeMillis();
-                            log.info("栏目缓存线程:清除缓存开始");
-                            clearCache(columnCacheTask);
-                            long l1 = System.currentTimeMillis();
-                            log.info("栏目缓存线程:清除缓存完成,耗时={}", (l1 - l));
-                            log.info("栏目缓存线程:未处理任务={}", COLUMN_CACHE_TASK_BLOCKING_QUEUE.size());
-                        } else {
-                            synchronized (COLUMN_CACHE_TASK_BLOCKING_QUEUE) {
-                                COLUMN_CACHE_TASK_BLOCKING_QUEUE.wait();
-                            }
+                        long l = System.currentTimeMillis();
+                        log.info("栏目缓存线程:清除缓存开始");
+                        clearCache(columnCacheTask);
+                        long l1 = System.currentTimeMillis();
+                        log.info("栏目缓存线程:清除缓存完成,耗时={}", (l1 - l));
+                        log.info("栏目缓存线程:未处理任务={}", COLUMN_CACHE_TASK_BLOCKING_QUEUE.size());
+                    } else {
+                        synchronized (COLUMN_CACHE_TASK_BLOCKING_QUEUE) {
+                            COLUMN_CACHE_TASK_BLOCKING_QUEUE.wait();
                         }
+                    }
 //                    } catch (E5Exception e) {
 //                        log.error("栏目缓存线程:清理栏目缓存异常", e);
-                    } catch (Exception e) {
-                        log.error("栏目缓存线程异常", e);
-                    }
+                } catch (Exception e) {
+                    log.error("栏目缓存线程异常", e);
                 }
             }
         });
@@ -69,12 +66,9 @@ public class ColumnCacheJob {
         columnCacheThread.start();
 
         log.info("订阅e5缓存线程启动");
-        Thread e5CacheThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ColumnCacheSubscriber columnCacheSubscriber = new ColumnCacheSubscriber();
-                RedisManager.subscribe(columnCacheSubscriber, RedisKey.REDIS_COLUMN_CACHE_CHANNEL);
-            }
+        Thread e5CacheThread = new Thread(() -> {
+            ColumnCacheSubscriber columnCacheSubscriber = new ColumnCacheSubscriber();
+            RedisManager.subscribe(columnCacheSubscriber, RedisKey.REDIS_COLUMN_CACHE_CHANNEL);
         });
         e5CacheThread.setName("e5-cache-fresh-thread-");
         e5CacheThread.start();
