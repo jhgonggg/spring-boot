@@ -18,6 +18,7 @@ public class ThreadPoolConfig implements AsyncConfigurer {
     public TaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(10);
+        // cpu 核心数 *2 ,线程大了会加大 cpu 开销 降低性能
         taskExecutor.setMaxPoolSize(20);
         //线程池所使用的缓冲队列
         taskExecutor.setQueueCapacity(200);
