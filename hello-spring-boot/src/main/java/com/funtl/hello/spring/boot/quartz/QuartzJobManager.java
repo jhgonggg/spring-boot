@@ -1,25 +1,12 @@
 package com.funtl.hello.spring.boot.quartz;
 
+import com.funtl.hello.spring.boot.util.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.CronScheduleBuilder;
-import org.quartz.CronTrigger;
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
-import org.quartz.TriggerKey;
+import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author qy
@@ -32,17 +19,19 @@ public class QuartzJobManager {
 
     private static QuartzJobManager jobUtil;
 
-    @Autowired
     private Scheduler scheduler;
 
-    public QuartzJobManager() {
-        log.info("init jobUtil");
-        jobUtil = this;
-    }
-
     public static QuartzJobManager getInstance() {
-        log.info("retun  JobCreateUtil");
-        return QuartzJobManager.jobUtil;
+        log.info("get  QuartzJobManager");
+        if (jobUtil == null) {
+            synchronized (QuartzJobManager.class) {
+                if (jobUtil == null) {
+                    jobUtil = new QuartzJobManager();
+                }
+            }
+        }
+        jobUtil.scheduler = SpringContextHolder.getBean("scheduler", Scheduler.class);
+        return jobUtil;
     }
 
     /**
@@ -53,8 +42,6 @@ public class QuartzJobManager {
      * @param jobGroupName   任务所在组名称
      * @param cronExpression cron表达式
      * @throws Exception
-     *
-     *
      */
     public void addJob(Class clazz, String jobName, String jobGroupName, String cronExpression) throws Exception {
 
@@ -83,8 +70,6 @@ public class QuartzJobManager {
      * @param cronExpression cron表达式
      * @param argMap         map形式参数
      * @throws Exception
-     *
-     *
      */
     public void addJob(Class clazz, String jobName, String jobGroupName, String cronExpression, Map<String, Object> argMap) throws Exception {
 
@@ -113,8 +98,6 @@ public class QuartzJobManager {
      * @param jobName      任务名称
      * @param jobGroupName 任务所在组名称
      * @throws SchedulerException
-     *
-     *
      */
     public void pauseJob(String jobName, String jobGroupName) throws SchedulerException {
         scheduler.pauseJob(JobKey.jobKey(jobName, jobGroupName));
@@ -126,8 +109,6 @@ public class QuartzJobManager {
      * @param jobName      任务名称
      * @param jobGroupName 任务所在组名称
      * @throws SchedulerException
-     *
-     *
      */
     public void resumeJob(String jobName, String jobGroupName) throws SchedulerException {
 
@@ -142,8 +123,6 @@ public class QuartzJobManager {
      * @param jobGroupName   任务所在组名称
      * @param cronExpression cron表达式
      * @throws Exception
-     *
-     *
      */
     public void updateJob(String jobName, String jobGroupName, String cronExpression) throws Exception {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);
@@ -169,8 +148,6 @@ public class QuartzJobManager {
      * @param cronExpression cron表达式
      * @param argMap         参数
      * @throws Exception
-     *
-     *
      */
     public void updateJob(String jobName, String jobGroupName, String cronExpression, Map<String, Object> argMap) throws Exception {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);
@@ -197,8 +174,6 @@ public class QuartzJobManager {
      * @param jobGroupName 任务所在组名称
      * @param argMap       参数
      * @throws Exception
-     *
-     *
      */
     public void updateJob(String jobName, String jobGroupName, Map<String, Object> argMap) throws Exception {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);
@@ -220,8 +195,6 @@ public class QuartzJobManager {
      * @param jobName      任务名称
      * @param jobGroupName 任务所在组名称
      * @throws Exception
-     *
-     *
      */
     public void deleteJob(String jobName, String jobGroupName) throws Exception {
         scheduler.pauseTrigger(TriggerKey.triggerKey(jobName, jobGroupName));
@@ -232,9 +205,6 @@ public class QuartzJobManager {
 
     /**
      * 启动所有定时任务
-     *
-     *
-     *
      */
     public void startAllJobs() {
         try {
@@ -246,9 +216,6 @@ public class QuartzJobManager {
 
     /**
      * 关闭所有定时任务
-     *
-     *
-     *
      */
     public void shutdownAllJobs() {
         try {
