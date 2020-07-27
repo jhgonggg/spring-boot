@@ -38,14 +38,14 @@ public class ExcelUtil {
     }
 
 
-    public static void export(String fileName, List<List<String>> head, String sheetName, List<List<String>> dataList,
+    public static void export(String fileName, List<List<String>> head, List<List<String>> dataList,
                               HttpServletResponse response) {
         try {
             response.setContentType("application/vnd.ms-excel");
             response.setCharacterEncoding(SysConst.UTF_8);
             String filename = URLEncoder.encode(fileName, SysConst.UTF_8);
             response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename + ".xlsx");
-            EasyExcel.write(response.getOutputStream()).head(head).sheet(sheetName).doWrite(dataList);
+            EasyExcel.write(response.getOutputStream()).head(head).sheet(fileName).doWrite(dataList);
         } catch (Exception e) {
             log.error("导出数据异常,文件名:{},错误信息:{}", fileName, e);
             throw new SouthcnException(MsgCode.FAIL, "导出数据异常");
