@@ -1,5 +1,7 @@
 package com.funtl.hello.spring.boot.test;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -72,6 +74,10 @@ public class Test {
         list.add(a);
         String s = new String(list.get(0));
         System.out.println(s);
+
+        DateTime date = DateUtil.date();
+
+        System.out.println(date);
 
     }
 

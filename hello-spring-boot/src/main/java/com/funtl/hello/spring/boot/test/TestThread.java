@@ -57,9 +57,8 @@ public class TestThread {
         @Override
         public void run() {
             try {
-                System.out.println(1111);
-                System.out.println(Thread.currentThread().getName());
-                Thread.sleep(3000);
+                System.out.println("启动页:刷新缓存" + Thread.currentThread().getName());
+                Thread.sleep(10000);
             } catch (Exception e) {
                 log.error("启动页:刷新缓存异常", e);
             }
