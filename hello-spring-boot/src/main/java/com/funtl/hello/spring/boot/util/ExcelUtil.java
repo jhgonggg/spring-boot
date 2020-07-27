@@ -1,7 +1,9 @@
 package com.funtl.hello.spring.boot.util;
 
 import com.alibaba.excel.EasyExcel;
+import com.funtl.hello.spring.boot.config.SouthcnException;
 import com.funtl.hello.spring.boot.constant.SysConst;
+import com.funtl.hello.spring.boot.response.MsgCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 
@@ -21,7 +23,7 @@ public class ExcelUtil {
             EasyExcel.write(response.getOutputStream(), tClass).sheet(filename).doWrite(exportList);
         } catch (Exception e) {
             log.error("导出数据异常,文件名:{},错误信息:{}", fileName, e);
-            throw new RuntimeException("导出数据异常");
+            throw new SouthcnException(MsgCode.FAIL, "导出数据异常");
         }
     }
 
@@ -31,7 +33,22 @@ public class ExcelUtil {
             EasyExcel.write(filePath, tClass).sheet(encoderFileName).doWrite(dataList);
         } catch (Exception e) {
             log.error("生成excel出错，文件名：{}，错误信息：{}", fileName, e.getMessage());
-            throw new RuntimeException("生成excel出错");
+            throw new SouthcnException(MsgCode.FAIL, "导出数据异常");
+        }
+    }
+
+
+    public static void export(String fileName, List<List<String>> head, String sheetName, List<List<String>> dataList,
+                              HttpServletResponse response) {
+        try {
+            response.setContentType("application/vnd.ms-excel");
+            response.setCharacterEncoding(SysConst.UTF_8);
+            String filename = URLEncoder.encode(fileName, SysConst.UTF_8);
+            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename + ".xlsx");
+            EasyExcel.write(response.getOutputStream()).head(head).sheet(sheetName).doWrite(dataList);
+        } catch (Exception e) {
+            log.error("导出数据异常,文件名:{},错误信息:{}", fileName, e);
+            throw new SouthcnException(MsgCode.FAIL, "导出数据异常");
         }
     }
 }
