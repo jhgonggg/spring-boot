@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -28,7 +30,7 @@ public class Test {
         System.out.println("111111111111");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         HashMap map2 =new HashMap(2);
         HashMap<String, Object> map = Maps.newHashMap();
         Collection<Object> values = Maps.newHashMap().values();
@@ -75,9 +77,15 @@ public class Test {
         String s = new String(list.get(0));
         System.out.println(s);
 
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
         DateTime date = DateUtil.date();
-
+        Thread.sleep(1000);
         System.out.println(date);
+
+        stopWatch.stop();
+
+        System.out.println(stopWatch.getTime(TimeUnit.MILLISECONDS));
 
     }
 
