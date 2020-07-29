@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
+import tk.mybatis.mapper.weekend.WeekendSqls;
 
 import java.util.Date;
 import java.util.List;
@@ -146,7 +147,24 @@ public class CorrespondentServiceImpl extends BaseServiceImpl<Correspondent> imp
         WeekendCriteria<Correspondent, Object> weekendCriteria = weekend.weekendCriteria();
         weekendCriteria.andEqualTo(Correspondent::getStatus, SysConst.ZERO)
                        .andLike(Correspondent::getName, SysConst.PERCENT.concat(StringUtils.trim(name)).concat(SysConst.PERCENT));
+
+        WeekendSqls<Correspondent> sqls = WeekendSqls.<Correspondent>custom().andEqualTo(Correspondent::getStatus, SysConst.ZERO).andLike(Correspondent::getName, SysConst.PERCENT.concat(StringUtils.trim(name)).concat(SysConst.PERCENT));
+        FnConverter<Correspondent> fn = FnConverter.of(Correspondent.class);
+        Example example = Example.builder(Correspondent.class).where(sqls).orderBy(fn.fnToFieldName(Correspondent::getCreateTime)).build();
+        this.mapper.selectByExample(example);
         return this.mapper.selectByExample(weekend);
+    }
+
+    /**
+     * sql第二种写法
+     * @param name
+     * @return
+     */
+    public List<Correspondent> getByName2(String name) {
+        WeekendSqls<Correspondent> sqls = WeekendSqls.<Correspondent>custom().andEqualTo(Correspondent::getStatus, SysConst.ZERO).andLike(Correspondent::getName, SysConst.PERCENT.concat(StringUtils.trim(name)).concat(SysConst.PERCENT));
+        FnConverter<Correspondent> fn = FnConverter.of(Correspondent.class);
+        Example example = Example.builder(Correspondent.class).where(sqls).orderBy(fn.fnToFieldName(Correspondent::getCreateTime)).build();
+        return this.mapper.selectByExample(example);
     }
 
     /**
