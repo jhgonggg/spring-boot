@@ -376,3 +376,27 @@ INSERT INTO `yb_user_info` VALUES ('23', '43', '学生', '多读书多看报', '
 INSERT INTO `yb_user_info` VALUES ('24', '76', '学生', '多读书多看报', '代码', '2018-12-24', '2018-12-24');
 INSERT INTO `yb_user_info` VALUES ('25', '77', '学生', '多读书多看报', '代码', '2018-12-24', '2018-12-24');
 INSERT INTO `yb_user_info` VALUES ('26', '78', null, null, null, '2018-12-24', '2018-12-24');
+
+-- ----------------------------
+-- Table structure for correspondent
+-- ----------------------------
+
+CREATE TABLE `correspondent`
+(
+    `id`          int(11)     NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name`        varchar(50) NOT NULL COMMENT '姓名',
+    `phone`       varchar(50)  DEFAULT NULL COMMENT '手机号',
+    `unit`        varchar(50) NOT NULL COMMENT '单位',
+    `type`        int(1)      NOT NULL COMMENT '类型，1-新闻秘书  2-通讯员',
+    `area`        varchar(50) NOT NULL COMMENT '地区，21个地市+其他，共22个选项',
+    `dept`        varchar(50)  DEFAULT NULL COMMENT '部门',
+    `description` varchar(255) DEFAULT NULL COMMENT '简介',
+    `avatar`      varchar(255) DEFAULT NULL COMMENT '头像',
+    `user_id`     varchar(50) NOT NULL COMMENT '添加人',
+    `create_time` datetime    NOT NULL COMMENT '添加时间',
+    `status`      int(1)       DEFAULT '0' COMMENT '状态  0-有效  1-无效',
+    PRIMARY KEY (`id`),
+    KEY `idx_name_phone` (`name`, `phone`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 351
+  DEFAULT CHARSET = utf8mb4;

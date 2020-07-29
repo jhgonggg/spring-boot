@@ -91,7 +91,8 @@ public class WorkFlowReqDTO {
     private String assignUserId;
 
     @ApiModelProperty(value="是否私密日志， 0-否， 1-是")
-    private Integer isPrivate;
+    @Builder.Default      // 用 Builder 创建对象时 不写属性时 返回默认是 0
+    private Integer isPrivate= 0;
 
     @ApiModelProperty(value="审校人,只有发交稿、发编审才有该字段")
     private String checkMan;

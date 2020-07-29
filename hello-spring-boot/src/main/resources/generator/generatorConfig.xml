@@ -11,10 +11,12 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
-        <!-- 配置 tk.mybatis 插件 让生成的mapper继承 MyMapper-->
+        <!-- 配置 tk.mybatis 插件 让生成的mapper继承 Mapper-->
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="tk.mybatis.mapper.MyMapper"/>
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
         </plugin>
+        <!-- 配置 链式-->
+        <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
 
         <!-- 配置数据库连接 -->
         <jdbcConnection
@@ -37,7 +39,10 @@
                 type="XMLMAPPER"/>
 
         <!-- 配置需要生成的表，% 代表所有 -->
-        <table catalog="yb" tableName="yb_agree">
+        <table catalog="yb" tableName="correspondent">
+            <!-- 配置生成的类继承 BaseEntity-->
+            <property name="rootClass" value="com.funtl.hello.spring.boot.base.BaseEntity"/>
+
             <!-- mysql 配置 主键 id 自增 -->
 <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
         </table>

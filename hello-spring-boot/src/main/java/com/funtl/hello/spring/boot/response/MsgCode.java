@@ -13,7 +13,7 @@ public enum MsgCode {
 
     SUCCESS(200, "成功"),
     FAIL(100, "网络竟然崩溃了"),
-
+    NO_VALID(300, "用户未登录或已失效"),
     SYSTEM_ERROR(900, "系统繁忙");
 
 

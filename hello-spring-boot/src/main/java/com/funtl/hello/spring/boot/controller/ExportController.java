@@ -36,33 +36,4 @@ public class ExportController {
 //        ExcelUtil.export("效能统计表", head, dataList, response);
 //    }
 
-//    @ApiOperation("通讯员导出")
-//    @GetMapping(value = "/export")
-//    public void export(@Valid CorrespondentQueryDTO dto, HttpServletResponse response) {
-//        PageInfo<Correspondent> pageInfo = correspondentService.query(dto);
-//        List<CorrespondentExcel> correspondentExcelList = CorrespondentImportHelper.getCorrespondentExcelList(pageInfo.getList());
-//        try {
-//            String time = DateUtil.format(new Date(), DatePattern.PURE_DATE_FORMAT);
-//            String excelName = "通讯员列表-" + time;
-//            String fileName = URLEncoder.encode(excelName, SysConst.UTF_8);
-//            response.setHeader("Content-disposition", "attachment; filename=" + fileName + SysConst.XLSX);
-//            response.setCharacterEncoding(SysConst.UTF_8);
-//            response.setContentType("application/vnd.ms-excel");
-//            WriteCellStyle contentWriteCellStyle = new WriteCellStyle();
-//            // 设置边框
-//            contentWriteCellStyle.setBorderBottom(BorderStyle.THIN);
-//            contentWriteCellStyle.setBorderLeft(BorderStyle.THIN);
-//            contentWriteCellStyle.setBorderRight(BorderStyle.THIN);
-//            contentWriteCellStyle.setBorderTop(BorderStyle.THIN);
-//            WriteCellStyle headWriteCellStyle = new WriteCellStyle();
-//            //设置表头居中对齐
-//            headWriteCellStyle.setHorizontalAlignment(HorizontalAlignment.CENTER);
-//            HorizontalCellStyleStrategy horizontalCellStyleStrategy = new HorizontalCellStyleStrategy(headWriteCellStyle, contentWriteCellStyle);
-//            EasyExcel.write(response.getOutputStream(), CorrespondentExcel.class).excelType(ExcelTypeEnum.XLSX).sheet("通讯员").registerWriteHandler(horizontalCellStyleStrategy).doWrite(correspondentExcelList);
-//        } catch (Exception e) {
-//            log.error("通讯员导出失败", e);
-//            throw new SouthcnException(MsgCode.FAIL, "通讯员导出异常");
-//        }
-//    }
-
 }

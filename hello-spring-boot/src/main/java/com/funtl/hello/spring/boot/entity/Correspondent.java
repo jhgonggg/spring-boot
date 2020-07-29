@@ -1,10 +1,14 @@
 package com.funtl.hello.spring.boot.entity;
 
+import com.funtl.hello.spring.boot.base.BaseEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
-public class Correspondent {
+@Table(name = "correspondent")
+public class Correspondent extends BaseEntity {
     /**
      * 主键
      */
@@ -64,9 +68,8 @@ public class Correspondent {
     private Date createTime;
 
     /**
-     * 添加时间
+     * 状态  0-有效  1-无效
      */
-    @Column(name = "status")
     private Integer status;
 
     /**
@@ -205,7 +208,7 @@ public class Correspondent {
     /**
      * 获取简介
      *
-     * @return desc - 简介
+     * @return description - 简介
      */
     public String getDescription() {
         return description;
@@ -278,30 +281,22 @@ public class Correspondent {
         return this;
     }
 
+    /**
+     * 获取状态  0-有效  1-无效
+     *
+     * @return status - 状态  0-有效  1-无效
+     */
     public Integer getStatus() {
         return status;
     }
 
+    /**
+     * 设置状态  0-有效  1-无效
+     *
+     * @param status 状态  0-有效  1-无效
+     */
     public Correspondent setStatus(Integer status) {
         this.status = status;
         return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Correspondent{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", unit='" + unit + '\'' +
-                ", type=" + type +
-                ", area='" + area + '\'' +
-                ", dept='" + dept + '\'' +
-                ", description='" + description + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", userId='" + userId + '\'' +
-                ", createTime=" + createTime +
-                ", status=" + status +
-                '}';
     }
 }

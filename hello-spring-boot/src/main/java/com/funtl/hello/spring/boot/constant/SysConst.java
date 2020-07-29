@@ -19,7 +19,7 @@ public final class SysConst {
     public static final String UTF_8 = "UTF-8";
     public static final String SLANTING = "/";
     public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
+    public static final String XLSX = ".xlsx";
     public static final long EXPIRE_DEFAULT = 60L * 5;
 
     public static final String DOUBLE_QUOTATION = "::";
@@ -34,6 +34,17 @@ public final class SysConst {
 
     public static final int ONE = 1;
 
+    /**
+     * token常量
+     */
+
+    public static final String TOKEN = "token";
+
+    /**
+     * admin模块排除登录校验
+     */
+    public static final String[] ADMIN_END_WITHS = new String[]{"currentUserInfo", "index.do", "logout.do", "enter",
+            "signOut", "sendCode", "getCode", "getQrcode", "checkQrcode", "checkToken"};
 
     /**
      * 工作类型常量
@@ -50,5 +61,15 @@ public final class SysConst {
             WorkFlowTypeEnum.TASK.getType(),
             WorkFlowTypeEnum.REVIEWER.getType(),
             WorkFlowTypeEnum.PROOFREAD.getType());
+
+    /**
+     * admin模块aop排除
+     */
+    public static final List<String> ADMIN_EXCLUDES = Arrays.asList(
+            "com.southcn.nfplus.report.conduct.admin.controller.wf.WorkFlowController.initBinder",
+            "com.southcn.nfplus.report.conduct.admin.controller.StatisticsController.initBinder",
+            "com.southcn.nfplus.report.conduct.admin.controller.StatisticsExportController.initBinder",
+            "com.southcn.nfplus.report.conduct.admin.controller.wf.VisitOperateController.initBinder",
+            "com.southcn.nfplus.report.conduct.admin.controller.wf.WorkFlowOperateController.initBinder");
 
 }
