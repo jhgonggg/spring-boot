@@ -400,3 +400,103 @@ CREATE TABLE `correspondent`
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 351
   DEFAULT CHARSET = utf8mb4;
+
+-- ----------------------------
+-- Table structure for monitor_config
+-- ----------------------------
+
+CREATE TABLE `monitor_config`
+(
+    `id`              int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `user_id`         varchar(255)  DEFAULT NULL COMMENT '用户id',
+    `name`            varchar(255)  DEFAULT NULL COMMENT '监控主题名',
+    `status`          tinyint(1)    DEFAULT '1' COMMENT '是否有效',
+    `state`           tinyint(1)    DEFAULT '1' COMMENT '是否开启监控',
+    `push_num`        int(11)       DEFAULT '0' COMMENT '推送条数',
+    `keyword_search`  varchar(255)  DEFAULT NULL COMMENT '包含关键词（如果所有关键字则用 .*表示）',
+    `keyword_must`    varchar(255)  DEFAULT NULL COMMENT '同时包含关键字',
+    `keyword_exclude` varchar(255)  DEFAULT NULL COMMENT '排除关键字',
+    `sites`           varchar(4096) DEFAULT NULL COMMENT '站点信源',
+    `create_time`     datetime      DEFAULT NULL COMMENT '创建时间',
+    `update_time`     datetime      DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`),
+    KEY `user_id` (`user_id`(191), `keyword_search`(191), `keyword_must`(191), `keyword_exclude`(191))
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 21
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Table structure for monitor_push
+-- ----------------------------
+
+CREATE TABLE `monitor_push`
+(
+    `id`          int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `system`      varchar(255)  DEFAULT NULL COMMENT '来自系统',
+    `doc_id`      varchar(255)  DEFAULT NULL COMMENT '系统唯一id',
+    `title`       varchar(255)  DEFAULT NULL COMMENT '抓取标题',
+    `content`     text COMMENT '抓取内容',
+    `send_ip`     varchar(255)  DEFAULT NULL COMMENT '抓取ip',
+    `send_time`   datetime      DEFAULT NULL COMMENT '抓取时间',
+    `media_name`  varchar(255)  DEFAULT NULL COMMENT '对应信源名称',
+    `url`         varchar(512)  DEFAULT NULL COMMENT '链接',
+    `platform`    varchar(512)  DEFAULT NULL COMMENT '来自平台',
+    `push_time`   datetime      DEFAULT NULL COMMENT '接收推送时间',
+    `summary`     varchar(1024) DEFAULT NULL COMMENT '摘要',
+    `pv_count`    int(11)       DEFAULT '0' COMMENT 'pv',
+    `media_id`    varchar(255)  DEFAULT NULL COMMENT '对应信源编码',
+    `reply_count` int(11)       DEFAULT '0' COMMENT '回复数',
+    `create_time` datetime      DEFAULT NULL COMMENT '入库时间',
+    `update_time` datetime      DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`),
+    KEY `media_id` (`media_id`(191)),
+    KEY `create_time` (`create_time`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 10629
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci COMMENT ='南都采集推送结果';
+
+-- ----------------------------
+-- Table structure for monitor_push_record
+-- ----------------------------
+
+CREATE TABLE `monitor_push_record`
+(
+    `id`          int(11)      NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `config_id`   int(11)      NOT NULL COMMENT '配置id',
+    `push_id`     int(11)      NOT NULL COMMENT '对应推送表主键id',
+    `user_id`     varchar(255) NOT NULL COMMENT '用户id',
+    `msg`         varchar(2048) DEFAULT NULL COMMENT '推送消息',
+    `is_push`     tinyint(1)    DEFAULT '0' COMMENT '是否已经推送',
+    `push_time`   datetime      DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime      DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`),
+    KEY `create_time` (`push_time`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 198
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- ----------------------------
+-- Table structure for monitor_site
+-- ----------------------------
+
+CREATE TABLE `monitor_site`
+(
+    `id`          int(11)      NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `group_id`    varchar(255) DEFAULT NULL COMMENT '所属组编码',
+    `group_name`  varchar(255) DEFAULT NULL COMMENT '所属组（类别）',
+    `type`        varchar(255) DEFAULT NULL COMMENT '站点类型',
+    `status`      tinyint(1)   DEFAULT NULL COMMENT '是否有效',
+    `code`        varchar(255) NOT NULL COMMENT '编码',
+    `name`        varchar(255) DEFAULT NULL COMMENT '站点',
+    `state`       int(11)      DEFAULT NULL COMMENT '状态',
+    `create_time` datetime     DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime     DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1291
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
