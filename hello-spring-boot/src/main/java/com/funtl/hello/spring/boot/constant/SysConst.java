@@ -11,6 +11,7 @@ public final class SysConst {
     public static final String ALL = "*";
     public static final String SQUARE_BRACKETS = "[]";
     public static final String COMMA = ",";
+    public static final String CHINESE_COMMA = "，";
     public static final String COLON = ";";
     public static final String PERCENT = "%";
     public static final String DOT = ".";
@@ -21,6 +22,8 @@ public final class SysConst {
     public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String XLSX = ".xlsx";
     public static final long EXPIRE_DEFAULT = 60L * 5;
+    /** 线索雷达，包含所有关键字 */
+    public static final String MONITOR_SEARCH_ALL = ".*";
 
     public static final String DOUBLE_QUOTATION = "::";
 
@@ -29,6 +32,10 @@ public final class SysConst {
     public static final String PIC_SRC = "src";
 
     public static final String BODY = "body";
+
+    public static final String ND = "nd";
+
+    public static final String MONITOR_MSG = "【%s】\n%s\n@%s #%s#";
 
     public static final int ZERO = 0;
 

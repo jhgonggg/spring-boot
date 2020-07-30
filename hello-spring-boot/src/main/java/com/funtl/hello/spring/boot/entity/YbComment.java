@@ -1,14 +1,12 @@
 package com.funtl.hello.spring.boot.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.funtl.hello.spring.boot.base.BaseEntity;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "yb_comment")
-public class YbComment {
+public class YbComment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funtl.hello.spring.boot.mapper.MonitorConfigMapper">
+  <resultMap id="BaseResultMap" type="com.funtl.hello.spring.boot.entity.MonitorConfig">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="state" jdbcType="BIT" property="state" />
+    <result column="push_num" jdbcType="INTEGER" property="pushNum" />
+    <result column="keyword_search" jdbcType="VARCHAR" property="keywordSearch" />
+    <result column="keyword_must" jdbcType="VARCHAR" property="keywordMust" />
+    <result column="keyword_exclude" jdbcType="VARCHAR" property="keywordExclude" />
+    <result column="sites" jdbcType="VARCHAR" property="sites" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+</mapper>

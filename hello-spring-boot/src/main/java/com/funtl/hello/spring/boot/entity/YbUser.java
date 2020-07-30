@@ -1,22 +1,18 @@
 package com.funtl.hello.spring.boot.entity;
 
+import com.funtl.hello.spring.boot.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Table(name = "yb_user")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class YbUser {
+public class YbUser extends BaseEntity {
     /**
      * 用户ID
      */

@@ -1,10 +1,12 @@
 package com.funtl.hello.spring.boot.entity;
 
-import java.util.Date;
+import com.funtl.hello.spring.boot.base.BaseEntity;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "yb_timeline")
-public class YbTimeline {
+public class YbTimeline extends BaseEntity {
     /**
      * 时间轴id
      */

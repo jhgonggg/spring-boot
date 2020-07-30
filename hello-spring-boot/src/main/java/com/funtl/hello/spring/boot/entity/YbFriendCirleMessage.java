@@ -1,10 +1,12 @@
 package com.funtl.hello.spring.boot.entity;
 
-import java.util.Date;
+import com.funtl.hello.spring.boot.base.BaseEntity;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "yb_friend_cirle_message")
-public class YbFriendCirleMessage {
+public class YbFriendCirleMessage extends BaseEntity {
     /**
      * 消息表id
      */

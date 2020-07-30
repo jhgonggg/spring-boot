@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funtl.hello.spring.boot.mapper.MonitorPushMapper">
+  <resultMap id="BaseResultMap" type="com.funtl.hello.spring.boot.entity.MonitorPush">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="system" jdbcType="VARCHAR" property="system" />
+    <result column="doc_id" jdbcType="VARCHAR" property="docId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="send_ip" jdbcType="VARCHAR" property="sendIp" />
+    <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="media_name" jdbcType="VARCHAR" property="mediaName" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
+    <result column="push_time" jdbcType="TIMESTAMP" property="pushTime" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="pv_count" jdbcType="INTEGER" property="pvCount" />
+    <result column="media_id" jdbcType="VARCHAR" property="mediaId" />
+    <result column="reply_count" jdbcType="INTEGER" property="replyCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+</mapper>

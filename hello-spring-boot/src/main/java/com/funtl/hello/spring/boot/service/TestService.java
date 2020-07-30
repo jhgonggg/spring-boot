@@ -1,7 +1,7 @@
 package com.funtl.hello.spring.boot.service;
 
 import com.alibaba.fastjson.JSON;
-import com.funtl.hello.spring.boot.entity.ArticlePcFlow;
+import com.funtl.hello.spring.boot.dto.ArticlePcFlow;
 import com.funtl.hello.spring.boot.response.Response;
 import org.apache.commons.lang3.StringUtils;
 

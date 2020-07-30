@@ -1,10 +1,12 @@
 package com.funtl.hello.spring.boot.entity;
 
-import java.util.Date;
+import com.funtl.hello.spring.boot.base.BaseEntity;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "yb_user_goodfriend")
-public class YbUserGoodfriend {
+public class YbUserGoodfriend extends BaseEntity {
     /**
      * 好友表ID
      */

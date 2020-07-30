@@ -39,6 +39,12 @@ public enum CacheParamEnum {
 
     USER("user.",100L),
 
+    /**
+     * 监控信源列表
+     */
+    MONITOR_LIST("monitor.list", 3600L),
+
+
     ;
 
     /**

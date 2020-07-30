@@ -1,14 +1,12 @@
 package com.funtl.hello.spring.boot.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.funtl.hello.spring.boot.base.BaseEntity;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "yb_record")
-public class YbRecord {
+public class YbRecord extends BaseEntity {
     /**
      * 聊天记录 ID
      */

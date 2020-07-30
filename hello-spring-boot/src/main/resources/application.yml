@@ -54,7 +54,7 @@ server:
 
 # 打印日志信息
 logging:
-  file: logs/spring-boot-hello.log
+#  file: logs/spring-boot-hello.log
   # 级别
   level.org.springframework.web: DEBUG
   level.com.funtl.hello.spring.boot: info
