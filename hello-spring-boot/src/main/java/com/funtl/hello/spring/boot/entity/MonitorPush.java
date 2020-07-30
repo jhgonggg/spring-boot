@@ -1,10 +1,13 @@
 package com.funtl.hello.spring.boot.entity;
 
 import com.funtl.hello.spring.boot.base.BaseEntity;
-import java.util.Date;
-import javax.persistence.*;
 
-@Table(name = "yb..monitor_push")
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Date;
+
+@Table(name = "monitor_push")
 public class MonitorPush extends BaseEntity {
     /**
      * 主键
