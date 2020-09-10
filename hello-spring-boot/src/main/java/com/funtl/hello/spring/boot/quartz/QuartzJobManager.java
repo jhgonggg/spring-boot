@@ -4,7 +4,6 @@ import com.funtl.hello.spring.boot.util.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -13,7 +12,7 @@ import java.util.*;
  * @date 2019/9/30 14:40
  * @description task 任务创建工具类
  */
-@Component
+//@Component
 @Slf4j
 public class QuartzJobManager {
 

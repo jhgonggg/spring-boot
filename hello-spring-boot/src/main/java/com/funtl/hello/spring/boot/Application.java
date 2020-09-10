@@ -18,7 +18,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
 
         Object bean = SpringContextHolder.getBean(Environment.class);
-        System.out.println(bean);
+        System.out.println("environment:" + bean);
     }
 
 }
